@@ -1,0 +1,8 @@
+**/.vscode/
+**/.ipynb_checkpoints
+*.pdf
+*.docx
+*.zip
+*.png
+*.jpg
+*.jpeg

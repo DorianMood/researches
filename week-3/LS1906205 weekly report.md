@@ -63,7 +63,24 @@ I implemented a very naive one-head attention (Figure 9)
 
 ![Figure 9 - naive attention implementation](naive-attention.png)
 
+So, attention is a method to weight an edge accourding to its importance to node.
+
 ## 4. Interpretable Graph Capsule Networks for Object Recognition
 This paper purpose a way of applying GCN in object recognition.
+
+Paper is mainly about computer vision. They use term *capsule* to describe some region of image (for example face features like eyes or nose), which is important for recognition of an object.
+
+The algorithm goes as follows:
+
+1. Extract *primary capsules* from image
+2. Transform capsules to intermediate state
+3. Do an attenction based graph pooling (attention mechanism from GAT[@Velickovic2017])
+4. Then we got output capsules
+
+The design of the network can be seen on Figure 10.
+
+![Figure 10](graph-capsule-networks.png)
+
+Overall article is quite interesting but I didn't take a look at CapNets architecture, so for now it's kind of black box for me.
 
 ## References

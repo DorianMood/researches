@@ -14,11 +14,57 @@ autoSectionLabels: True
 
 # 1. Attention is all you need
 
-This paper [@Vaswani2017] is a milestone in NLP. I've picked it just to have a clear explanation of Transformer architecture, which is used in the 2-nd chapter of this report. In this article the new architecture called Transformer shows a high performance growth comparing to previous approaches. Implementation can be seen here [@AlexanderRush]
+This paper [@Vaswani2017] is a milestone in NLP. I've picked it just to have a clear explanation of Transformer architecture, which is used in the 2-nd chapter of this report. In this article the new architecture called Transformer shows a high performance growth comparing to previous approaches. Implementation can be seen here [@AlexanderRush].
+
+Authors purpose a novel architecture [@fig:attention_architecture].
+
+![Transformer architecture](attention_architecture.png){#fig:attention_architecture}
+
+Data flow is quite simple. This architecture follows encoder-decoder logic, so first features are passed through positional encoding, then multi-head attention is applied. As an output of encoder we got an encoded vector of intermediate representation. Then it can be decoded through recursive decoder (it considers both previous state passed through masked attention and intermediate representations). Encoder can be parallelized.
+
+Calculations are described on [@fig:attention_is_all_you_need].
+
+![Attention calculation](attention%20is%20all%20you%20need.png){#fig:attention_is_all_you_need}
 
 # 2. A generalization of Transformer Networks to Graphs
 
 In this paper [@Dwivedi2020] authors apply a Transformer architecture on graph.
+
+It's quite obvious that transformer architecture can be generalized to graph. Moreover, transformer architecture seems to be a very neat and easy to apply on structured data.
+
+Author purpose a following scheme:
+
+1. Use graph Laplacian eigenvectors in positional encoding.
+2. Similar to NLP transformer features then are cloned into queries and keys.
+3. Multi-head attention is being applied.
+4. Concatenation, normalization and MLP is being applied.
+5. Output is next layer features.
+
+![Graph transformer architecture](graph_transformer.png){#fig:graph_transformer}
+
+Linear transformation applied on node and edge features:
+$$
+\hat{h_i^0}=A^0\alpha_i + a^0 ; e_{ij}^0=B^0\beta_{ij}+b^0
+$${#eq:graph_transformer_feature_encoding}
+
+Position encoding (using eigenvectors).
+$$
+\lambda^0_i=C^0\lambda_i+c^0 ; h^0_i=\hat{h}^0_i+\lambda^0_i
+$${#eq:graph_transformer_position_encoding}
+
+Finally node update rule.
+$$
+\hat{h}_i^{l+1}=O_h^lconcat_{k=1}^H(\sum_{j\in{N}}w^{k,l}_{ij}V^{k,l}h^l_j)
+$${#eq:graph_transformer_update}
+
+Where
+$$
+w^{k,l}_{ij}=softmax_j(\dfrac{Q^ {k,l}h^l_i*K^{k,l}h^l_j}{\sqrt{d_k}})
+$${#eq:graph_transformer_weight}
+
+In the end, looking at the results [@fig:transformer_results] we can see that Laplacian positional encoding shows highest performance. However, overall performance is not really high. So, I think that even though a Graph Transformer networks are interesting, they still are not showing an outstanding performance (comparing to GAT for example).
+
+![Results](transformer_results.png){#fig:transformer_results}
 
 # 3. Inductive representation Learning on Large Graphs
 
@@ -34,11 +80,15 @@ This paper purposes a method to learn on large graphs and predict unseen element
 
 # 6. Learning aligned-spacial graph convolutional networks for graph classification
 
+
+
 # 7. Simple and deep graph convolutional networks
+
+
 
 # 8. CayleyNets. Graph convolutional neural networks with complex rational spectral filters
 
-In this paper[@Levie2019] authors purpose using Cayley filters as a convolutional kernel. They claim that even first order Cayley polynomials.
+In this paper[@Levie2019] authors purpose using Cayley filters as a convolutional kernel. They claim that even first order Cayley polynomials are more effective then Chebyshev polynomials of higher order.
 They define a *Cayley polynomial* as [@eq:polynomial]
 
 $$

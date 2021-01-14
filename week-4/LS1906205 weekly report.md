@@ -67,5 +67,23 @@ Where
  - $f$ is a vector of signals $v\times c$ and $v,c$ are number of nodes and number of features respectively
  - $c, h$ are learnable
 
+Authors claim that the main advantages of considered architecture are:
+
+1. No need to compute eigen-decomposition of graph Laplacian (Since they are using Laplacian in the kernel). This makes the algorithm much faster.
+2. Filters are localized in the spacial domain.
+3. Since Cayley transform maps a real numbers on a line of circle (shown yellow [@fig:cayley_transform]), then $C^j(h\Delta)$ from [@eq:laurent] can be thought as a multiplication by a pure harmonic in the frequency domain [@eq:laurent_filter].
+  $$
+    G=c_0I+\sum_{j=1}^{r}c_jC^j(h\Delta)+\bar{c_j}C^{-j}(h\Delta)
+  $${#eq:laurent}
+
+  $$
+    C^j(h\Delta)=\Phi diag([C(h\lambda_1)]^j,...,[C(h\lambda)_n]^j)\Phi^T
+  $${#eq:laurent_filter}
+
+The results are quite promising: An order of polynomial seems to correlate with an accuracy more stable then Chebyshev polynomials [@fig:accuracy;@fig:results].
+
+![Accuracy on MNIST dataset](cayley_accuracy.png){#fig:accuracy}
+
+![Results](cayley_results.png){#fig:results}
 
 # References

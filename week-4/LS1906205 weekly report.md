@@ -70,9 +70,21 @@ In the end, looking at the results [@fig:transformer_results] we can see that La
 
 In this paper [@Hamilton2017] they purpose in some sense improved version of graph convolution. This is a spacial approach.
 
+New algorithm was called GraphSAGE. This is a slightly modified version of spacial convolution. Main contribution is an idea to use $N(v)$ function for *sampling* neighbors. This function basically takes up to $\gamma$ neighbors of a node instead of taking into account all existing neighboring nodes.
+
+Aggregator with such setting is determined by [@eq:GraphSAGE_aggregator]. Here max pooling is being used.
+
+$$
+AGGREGATE^{pool}_k=max({\sigma(W_{pool}h^k_{u_i}+b), \forall_{u_i}\in N(v)})
+$${#eq:GraphSAGE_aggregator}
+
+In fact we learn function of neighbors instead of calculating a whole graph embeddings, what allows us to apply same learned function on a new completely unseen nodes.
+
 # 4. Relational inductive biases, deep learning, and graph networks
 
 This is a conceptual paper[@Battaglia2018] about learning ability on graphs.
+
+
 
 # 5. Inductive representation learning on large graphs
 

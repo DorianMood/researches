@@ -80,25 +80,46 @@ $${#eq:GraphSAGE_aggregator}
 
 In fact we learn function of neighbors instead of calculating a whole graph embeddings, what allows us to apply same learned function on a new completely unseen nodes.
 
-# 4. Relational inductive biases, deep learning, and graph networks
+# 4. Learning aligned-spacial graph convolutional networks for graph classification
 
-This is a conceptual paper[@Battaglia2018] about learning ability on graphs.
+In [@Bai2019] they purpose to transform an arbitrary sized graphs into fixed-sized aligned grid structures, then being able to perform convolution [@fig:asgcn].
 
+![ASGCN architecture](asgcn.png){#fig:asgcn}
 
+Convolution is not unique, so I will focus more on an aligning process [@fig:align].
 
-# 5. Inductive representation learning on large graphs
+![Aligning process](align.png){#fig:align}
 
-This paper purposes a method to learn on large graphs and predict unseen elements.
+In short, aligning process is just a process of assigning corresponding vertexes of aligning graph to prepared grid. We have a grid, then for each vertex of current graph we align it best match from grid vertex set.
 
-# 6. Learning aligned-spacial graph convolutional networks for graph classification
+In general their performance is just average, nothing special, interesting is just their attempt to somehow align the graph to some grid.
 
+Again, results are understandable. We ignore spacial properties of a graph by using only features. Edges and spectrum are ignored in process of aligning.
 
+# 5. Simple and deep graph convolutional networks
 
-# 7. Simple and deep graph convolutional networks
+In this paper [@Chen2020] authors consider a problem of over-smoothing in case of stacking several layers of GCN. They solve this problem adding a residual connection [@eq:gcnii]
 
+$$
+H^{l+1}=\sigma(((1-\alpha_l)\hat{P}H^{(l)}+\alpha_lH^{(0)})((1-\beta_l)I_n+\beta_lW^{(l)}))
+$${#eq:gcnii}
 
+Where
+$$
+\hat{P}=\tilde{D}^{-1/2}\tilde{A}\tilde{D}^{-1/2}
+$${#eq:gcnii_convolution_matrix}
 
-# 8. CayleyNets. Graph convolutional neural networks with complex rational spectral filters
+they claim that this residual connection keeps results of each convolutional layer closer to initial features, which helps to avoid gradient vanishing problem.
+
+Their results [@fig:gcnii_results;@fig:gcnii]:
+
+![Results](gcnii_results.png){#fig:gcnii_results}
+
+![Results](gcnii.png){#fig:gcnii}
+
+So, we can see that in case of deep architecture their model is stable, however we can also see that it is not really necessary to build a deep network because even 2-layer network shows high performance (comparable to their deep architecture).
+
+# 6. CayleyNets. Graph convolutional neural networks with complex rational spectral filters
 
 In this paper[@Levie2019] authors purpose using Cayley filters as a convolutional kernel. They claim that even first order Cayley polynomials are more effective then Chebyshev polynomials of higher order.
 They define a *Cayley polynomial* as [@eq:polynomial]

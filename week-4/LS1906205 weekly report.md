@@ -7,10 +7,19 @@ author:
     affiliation: Beihang University
     location: Beijing
     email: nikita01051997@gmail.com
-abstract: "This week I have rad: ."
 csl: [ieee.csl]
 autoSectionLabels: True
 ---
+
+# Literature review
+
+Attention as a popular mechanism from NLP[@Vaswani2017], which helps to determine what features of a structured system are more important and what are less. There were an idea to apply attention on graphs[@Dwivedi2020]. In particular they purposed to apply a transformer architecture on graph. Even though the results were not really high, its clear that transformer is some kind of domain specific architecture and it should be applied only to some type of graph.
+
+There is always a tough question when we are talking about *inductive learning* on graph. The nature of graph and the way we store it always puts some limitation on how we can process it. If we add new nodes or edges, the whole structure of adjacency matrix changes. In [@Hamilton2017] they purpose a following approach: let's learn not graph structure, but some function of neighbors, so we will be able to classify or predict a new node features according to its neighbors. Another approach is from [@Bai2019], they first transform graphs to some fixed state, which is determined on the stage of designing algorithm, then apply graph convolutions. The first approach is more general in sense of applications. We can apply it everywhere we want, on totally different by size graphs. The second approach can be interesting in case of having a bunch of similar, but different by size graphs.
+
+There were some attempts to build a truly deep GCNs, however after even two or three layers we face a problem of over-smoothing. This means that graph changes state too fast, and after few layers it can transform to something really different from initial state. So, in [@Chen2020] they pointed that it can be a nice solution to add a residual connection to each layer of Deep GCN. It has been shown that it works and 64-layer Deep GCN doesn't suffer from over-smoothing.
+
+In spectral methods we always need to compute eigen-decomposition of graph Laplacian. This computation is quite expensive. In [@Levie2019] they purpose using of Cayley polynomials as a filter kernel. In this case we get rid of eigen-decomposition, applying convolution on graph Laplacian as it's explained after.
 
 # 1. Attention is all you need
 

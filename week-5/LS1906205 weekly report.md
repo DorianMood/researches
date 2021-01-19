@@ -97,8 +97,12 @@ $$
 H^{(t+1)}_v=\sigma([D^{-1}_vB_vH^{(t)}_vW^{(t+1)_v}||F_v\omega^{(t+1)}_v])
 $${#eq:bigcn_propagation rule}
 
-Where $D^{-1}$ is ... and $\omega$ is ....
+Where $D^{-1}$ is diagonal degree matrix and $\omega$ is annother filter matrix.
 
-Results are surprisingly good. They acheaved in some runs more then 90% accuracy for their database.
+Afterwards they apply SVM classifier on the final embedding set.
+
+![BiGCN results](bigcn_results.png){#fig:bigcn_results}
+
+Results ([@fig:bigcn_results]) are surprisingly good. They acheaved in some runs more then 85% accuracy for their database.
 
 # Reference 

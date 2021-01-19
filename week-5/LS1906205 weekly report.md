@@ -61,7 +61,44 @@ We can see that they perform slightly better then just plain architecture. I thi
 
 Let me start by defining a problem. They have a database containing a statistics on Tokyo emergency data. Each hospital can give an information about past emergency cases. Some data on patients age, gender ambulance type, date, hospital address etc. and some hospital characteristics like capacity. Each region aso has similar data on injury cases, injured citizens data etc.
 
+They build a bipartite graph [@fig:bigcn_graph] based on data mentioned above.
 
+![Hospital / Region emergency cases graph](bigcn_graph.png){#fig:bigcn_graph}
 
+It is clear that applying a GNN or GNN we won't get any adequate results. Graph structure is too specific [@eq:bigcn_adjacency_matrix_structure].
 
-# References
+$$
+A=\begin{bmatrix}
+  0_{M\times M} & B_u \\
+  B_v & 0_{N\times N}\\
+\end{bmatrix}
+$${#eq:bigcn_adjacency_matrix_structure}
+
+Where $B_u$ and $B_v$ are adjacency matrixes for hospital nodes $u\in U$ and for regions $v\in V$ and other elements are zeros because we know the graph is bipartite (node from $U$ can only be connected to node from $V$ and opposite).
+
+So, we can also think of feature matrix as shown in [@eq:bigcn_feature_matrix].
+
+$$
+H^{(0)}=\begin{bmatrix}
+  F_u & | & 0_{M\times(Q-P)} \\
+   & & F_u \\ 
+\end{bmatrix}
+$${#eq:bigcn_feature_matrix}
+
+Where $F_u$ and $F_v$ are features are corresponding initial features of $U$ and $V$ nodes subsets. $M$, $Q$ and $P$ are number of hospital nodes, number of region features, number of hospital features.
+
+![BIGCN architecture](bigcn_architecture.png){#fig:bigcn_architecture}
+
+Purposed architecture is shown on [@fig:bigcn_architecture]. Here we can see that there are two flows, for each part of bipartite graph. 
+
+And finlay all we need now is just to set up a propagation rule which is in [@eq:bigcn_propagation_rule]. Here I put only rule for half of the network (remind we have a bipartite graph with two types of nodes, so propagation is implementing in two flows running in parallel). A formula for $V$ flow is down here.
+
+$$
+H^{(t+1)}_v=\sigma([D^{-1}_vB_vH^{(t)}_vW^{(t+1)_v}||F_v\omega^{(t+1)}_v])
+$${#eq:bigcn_propagation rule}
+
+Where $D^{-1}$ is ... and $\omega$ is ....
+
+Results are surprisingly good. They acheaved in some runs more then 90% accuracy for their database.
+
+# Reference 

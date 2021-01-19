@@ -15,6 +15,8 @@ autoSectionLabels: True
 
 Currently graph neural nets are able to take into account only k-hop neighbors. But it's clear that this approach can be quite unfair. In [@wang_atpgnn_2021] authors built such an architecture that it can consider both local k-hop neighbors structure and distant nodes that are located in similar topological context. What do they do is basically perform three independent and completely different embedding procedures (discussed below) and then make a decision based on the embeddings results.
 
+The vast majority of works in the sphere is about some general type of graphs. However there are some works [@jin_predicting_2021] about bipartite graphs. Bipartite graph is just a graph that has two node sets. Nodes can be different types, then we also call it heterogeneous. In considered paper authors apply graph learning algorithm on Tokyo emergency infrastructure data. They separate the data on two types regions and hospitals each has its own features, then do a binary classification to predict whether the system can handle a difficult situation and what are the weakest elements.
+
 # 1. ATPGNN: Reconstruction of Neighborhood in Graph Neural Networks With Attention-Based Topological Patterns
 
 First let me show their architecture [@fig:atpgnn_architecture]. Knowing general idea it would be easier to explain all the deep concepts.
@@ -54,5 +56,12 @@ Architecture is quite interesting. They combine several architecture to obtain s
 ![ATPGNN results](atpgnn_results.png){#fig:atpgnn_results}
 
 We can see that they perform slightly better then just plain architecture. I think in some domains this architecture is applicable and can be used as an example of complex GNN architecture.
+
+# 2. Predicting Emergency Medical Service Demand with Bipartite Graph Convolutional Networks
+
+Let me start by defining a problem. They have a database containing a statistics on Tokyo emergency data. Each hospital can give an information about past emergency cases. Some data on patients age, gender ambulance type, date, hospital address etc. and some hospital characteristics like capacity. Each region aso has similar data on injury cases, injured citizens data etc.
+
+
+
 
 # References

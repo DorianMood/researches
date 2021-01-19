@@ -97,7 +97,7 @@ $$
 H^{(t+1)}_v=\sigma([D^{-1}_vB_vH^{(t)}_vW^{(t+1)_v}||F_v\omega^{(t+1)}_v])
 $${#eq:bigcn_propagation rule}
 
-Where $D^{-1}$ is diagonal degree matrix and $\omega$ is annother filter matrix.
+Where $D^{-1}$ is diagonal degree matrix and $\omega$ is another filter matrix.
 
 Afterwards they apply SVM classifier on the final embedding set.
 

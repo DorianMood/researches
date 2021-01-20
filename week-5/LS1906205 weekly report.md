@@ -17,6 +17,8 @@ Currently graph neural nets are able to take into account only k-hop neighbors. 
 
 The vast majority of works in the sphere is about some general type of graphs. However there are some works [@jin_predicting_2021] about bipartite graphs. Bipartite graph is just a graph that has two node sets. Nodes can be different types, then we also call it heterogeneous. In considered paper authors apply graph learning algorithm on Tokyo emergency infrastructure data. They separate the data on two types regions and hospitals each has its own features, then do a binary classification to predict whether the system can handle a difficult situation and what are the weakest elements.
 
+In computer vision there is a problem in field of action recognition. Action recognition can be seen as a problem of graph classification [@cheng_skeleton-based_2020]. We represent objects as a graphs and construct a representations for nodes. Then having both node features and connection information we can apply graph convolution in kind of special way.
+
 # 1. ATPGNN: Reconstruction of Neighborhood in Graph Neural Networks With Attention-Based Topological Patterns
 
 First let me show their architecture [@fig:atpgnn_architecture]. Knowing general idea it would be easier to explain all the deep concepts.
@@ -104,5 +106,9 @@ Afterwards they apply SVM classifier on the final embedding set.
 ![BiGCN results](bigcn_results.png){#fig:bigcn_results}
 
 Results ([@fig:bigcn_results]) are surprisingly good. They acheaved in some runs more then 85% accuracy for their database.
+
+# Skeleton-Based Action Recognition with Shift Graph Convolutional Network
+
+Given a video mapped skeleton data we want to classify skeleton movement 
 
 # Reference 

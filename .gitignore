@@ -4,3 +4,4 @@
 *.docx
 *.zip
 **/data/
+/fresh/*

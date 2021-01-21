@@ -109,6 +109,32 @@ Results ([@fig:bigcn_results]) are surprisingly good. They acheaved in some runs
 
 # Skeleton-Based Action Recognition with Shift Graph Convolutional Network
 
-Given a video mapped skeleton data we want to classify skeleton movement 
+Given a video mapped skeleton data we want to classify skeleton movement. In this task we again face a problem of locality. For example, classify "clap" we need to know about state of some distant nodes, but some other distant nodes are not as important. So, in case of "clap" we might be interested in states of left and right palms, but less interested in other body parts state. GNN wont work well in this case due to it's k-hop neighbors locality limitation.
+
+Authors purpose a method with the main idea borrowed from CNN's field, which is called Shift convolution [@wu_shift_2017]. In CNN shift is a special kind of channel-wise convolution [@fig:shift_cnn], but with, in some sense, special filters. Each filter contains only one non-zero element, so it can be implemented in more efficient way.
+
+![Shift CNN](shift_cnn.png){#fig:shift_cnn}
+
+Authors purpose to adopt this shift operator to graph domain following way. Let's define a shift by swapping neighboring nodes features [@shift_gcn].
+
+![Shift GCN](shift_gcn.png){#fig:shift_gcn}
+
+It can be formalized in the following way [@eq:shift_gcn].
+
+$$
+\tilde{F}_v=F_{(v,:c)}||F_{(B^1_v,c:2c)}|| ... ||F_{(B^n_v,nc:)}
+$${#eq:shift_gcn}
+
+Where $B_v=\{B^1_v, B^2_v,...,B^n_v\}$ is a set of neighbors for node $v$ and $c=\lfloor \dfrac{c}{n+1} \rfloor$.
+
+They then use this shift operator in convolution [@eq:shift_convolution].
+
+$$
+\tilde{F}_{(v,t,i)}=(1-\lambda)\cdot{F_{(v,\lfloor{t+S_i}\rfloor,i)}}+\lambda\cdot{F_{(v,\lfloor{t+S_i}\rfloor+1,i)}}
+$${#eq:shift_convolution}
+
+Where shift $S$ is learnable and $\lambda=S_i-\lfloor S_i \rfloor$.
+
+
 
 # Reference 

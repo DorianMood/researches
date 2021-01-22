@@ -107,7 +107,7 @@ Afterwards they apply SVM classifier on the final embedding set.
 
 Results ([@fig:bigcn_results]) are surprisingly good. They acheaved in some runs more then 85% accuracy for their database.
 
-# Skeleton-Based Action Recognition with Shift Graph Convolutional Network
+# 3. Skeleton-Based Action Recognition with Shift Graph Convolutional Network
 
 Given a video mapped skeleton data we want to classify skeleton movement. In this task we again face a problem of locality. For example, classify "clap" we need to know about state of some distant nodes, but some other distant nodes are not as important. So, in case of "clap" we might be interested in states of left and right palms, but less interested in other body parts state. GNN wont work well in this case due to it's k-hop neighbors locality limitation.
 
@@ -135,6 +135,22 @@ $${#eq:shift_convolution}
 
 Where shift $S$ is learnable and $\lambda=S_i-\lfloor S_i \rfloor$.
 
+# 4. Rumour Detection based on Graph Convolutional Neural Net
 
+There is a field in NLP where they try to detect rumors in dome domain (Twitter, Reddit etc.). Considering Twitter each tweet can be treated as a node in some Source-Reply (SR) graph [@fig:rumor_sr_graph], which has one root node and many reply nodes, Reply node has source node and it can also have reply nodes. So this is how they built their graphs.
+
+![Rumor Source-Reply graph](rumor_sr_graph.png){#fig:rumor_sr_graph}
+
+They claim that structure of SR graph need to be considered in final decision. So they purpose following architecture [@fig:rumor_architecture].
+
+![Network architecture](rumor_architecture.png){#fig:rumor_architecture}
+
+I will not put any formulas here just because they are quite trivial. They use spacial graph convolution and Text CNN, then they mix those two results according to the following mechanism [@eq:rumor_mix].
+
+$$
+y=PG\times{\dfrac{M}{N}}+PT\times{(1-\dfrac{N}{M})}
+$${#eq:rumor_mix}
+
+Where $PG$ and $PT$ are GCN and CNN outputs, $N$ and $M$ are number of nodes in current graph and number of nodes in the biggest graph.
 
 # Reference 

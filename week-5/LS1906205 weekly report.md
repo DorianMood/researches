@@ -19,6 +19,8 @@ The vast majority of works in the sphere is about some general type of graphs. H
 
 In computer vision there is a problem in field of action recognition. Action recognition can be seen as a problem of graph classification [@cheng_skeleton-based_2020]. We represent objects as a graphs and construct a representations for nodes. Then having both node features and connection information we can apply graph convolution in kind of special way.
 
+One of the first things we come up with thinking about graphs in real life is traffic system. Of course, road map really tidy lays on graph structure, so we can make use of all the graph methods on it. There are several approaches to traffic modeling. Statistics-based models, are few of them can still be quite powerful. Machine learning approaches, however, outperform them and with the significant growth of computational power during the last decade, machine learning models can now express a great power on traffic data. Authors purpose to use graph convolution [@cui_traffic_2020], it need to be localized due to natural road structure, where only neighboring nodes affect state of current node. They outperformed existing methods on real data of Seattle are traffic data.
+
 # 1. ATPGNN: Reconstruction of Neighborhood in Graph Neural Networks With Attention-Based Topological Patterns
 
 First let me show their architecture [@fig:atpgnn_architecture]. Knowing general idea it would be easier to explain all the deep concepts.
@@ -137,7 +139,7 @@ Where shift $S$ is learnable and $\lambda=S_i-\lfloor S_i \rfloor$.
 
 # 4. Rumour Detection based on Graph Convolutional Neural Net
 
-There is a field in NLP where they try to detect rumors in dome domain (Twitter, Reddit etc.). Considering Twitter each tweet can be treated as a node in some Source-Reply (SR) graph [@fig:rumor_sr_graph], which has one root node and many reply nodes, Reply node has source node and it can also have reply nodes. So this is how they built their graphs.
+There is a field in NLP where they try to detect rumors in some domains (Twitter, Reddit etc.) [@bai_rumour_2021]. Considering Twitter each tweet can be treated as a node in some Source-Reply (SR) graph [@fig:rumor_sr_graph], which has one root node and many reply nodes, Reply node has source node and it can also have reply nodes. So this is how they built their graphs.
 
 ![Rumor Source-Reply graph](rumor_sr_graph.png){#fig:rumor_sr_graph}
 
@@ -152,5 +154,9 @@ y=PG\times{\dfrac{M}{N}}+PT\times{(1-\dfrac{N}{M})}
 $${#eq:rumor_mix}
 
 Where $PG$ and $PT$ are GCN and CNN outputs, $N$ and $M$ are number of nodes in current graph and number of nodes in the biggest graph.
+
+# 5. Traffic Graph Convolutional Recurrent Neural Network: A Deep Learning Framework for Network-Scale Traffic Learning and Forecasting
+
+
 
 # Reference 

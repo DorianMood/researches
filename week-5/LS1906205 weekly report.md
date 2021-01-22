@@ -157,6 +157,24 @@ Where $PG$ and $PT$ are GCN and CNN outputs, $N$ and $M$ are number of nodes in 
 
 # 5. Traffic Graph Convolutional Recurrent Neural Network: A Deep Learning Framework for Network-Scale Traffic Learning and Forecasting
 
+Authors purpose using graph convolution to forecast future states based on learned parameters. They use architecture shown on [@fig:traffic_architecture].
 
+
+
+![Purposed architecture](traffic_architecture.png){#fig:traffic_architecture}
+
+Convolution intuition they used in their work can be seen on [@fig:traffic_comparison].
+
+![Convolutions comparison](traffic_comparison.png){#fig:traffic_comparison}
+
+As we can see from [@fig:traffic_results_table], their approach shows the best performance. Quite interesting that in case of traffic prediction it is more informative to show errors instead of confidence rate.
+
+![Results](traffic_results_table.png){#fig:traffic_results_table}
+
+Authors also visualized their results quite well as we can see from [@fig:traffic_results].
+
+![Visualized results](traffic_results.png){#fig:traffic_results}
+
+Overall quite interesting paper with real-world example.
 
 # Reference 

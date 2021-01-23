@@ -13,7 +13,7 @@ autoSectionLabels: True
 
 # Literature review
 
-Currently graph neural nets are able to take into account only k-hop neighbors. But it's clear that this approach can be quite unfair. In [@wang_atpgnn_2021] authors built such an architecture that it can consider both local k-hop neighbors structure and distant nodes that are located in similar topological context. What do they do is basically perform three independent and completely different embedding procedures (discussed below) and then make a decision based on the embeddings results.
+Currently graph neural nets are able to take into account only k-hop neighbors. But it's clear that this approach can be quite unfair. In [@wang_atpgnn_2021] authors built such an architecture that consider both local k-hop neighbors structure and distant nodes that are located in similar topological context. What do they do is basically perform three independent and completely different embedding procedures (discussed below) and then make a decision based on the embeddings results.
 
 The vast majority of works in the sphere is about some general type of graphs. However there are some works [@jin_predicting_2021] about bipartite graphs. Bipartite graph is just a graph that has two node sets. Nodes can be different types, then we also call it heterogeneous. In considered paper authors apply graph learning algorithm on Tokyo emergency infrastructure data. They separate the data on two types regions and hospitals each has its own features, then do a binary classification to predict whether the system can handle a difficult situation and what are the weakest elements.
 
@@ -49,7 +49,7 @@ The final formula of convolution is [@eq:atpgnn_convolution]
 
 $$
 \vec{h}^l_i=concatenate^K_{k=1}(\sigma(\sum_{v_j\in N_i}A^{k(l-1)}_{i,j}W^{k(l-1)}\vec{h}^{l-1}_j))
-$${@eq:atpgnn_convolution}
+$${#eq:atpgnn_convolution}
 
 Here $A$ is graph representation obtained by combining previously mentioned attentions.
 
@@ -99,7 +99,7 @@ And finlay all we need now is just to set up a propagation rule which is in [@eq
 
 $$
 H^{(t+1)}_v=\sigma([D^{-1}_vB_vH^{(t)}_vW^{(t+1)_v}||F_v\omega^{(t+1)}_v])
-$${#eq:bigcn_propagation rule}
+$${#eq:bigcn_propagation_rule}
 
 Where $D^{-1}$ is diagonal degree matrix and $\omega$ is another filter matrix.
 
@@ -117,7 +117,7 @@ Authors purpose a method with the main idea borrowed from CNN's field, which is 
 
 ![Shift CNN](shift_cnn.png){#fig:shift_cnn}
 
-Authors purpose to adopt this shift operator to graph domain following way. Let's define a shift by swapping neighboring nodes features [@shift_gcn].
+Authors purpose to adopt this shift operator to graph domain following way. Let's define a shift by swapping neighboring nodes features [@fig:shift_gcn].
 
 ![Shift GCN](shift_gcn.png){#fig:shift_gcn}
 
@@ -159,7 +159,39 @@ Where $PG$ and $PT$ are GCN and CNN outputs, $N$ and $M$ are number of nodes in 
 
 Authors purpose using graph convolution to forecast future states based on learned parameters. They use architecture shown on [@fig:traffic_architecture].
 
+Let me first define some limitations. $G$ is *undirected* graph $A$ and $D$ are adjacency and degree matrixes.
 
+In this paper authors consider $\tilde{A}$ from [@eq:traffic_khop] as k-hop neighbor matrix.
+
+$$
+\tilde{A}^k_{i,j}=min((A+I)^k_{i,j}, 1)
+$${#eq:traffic_khop}
+
+Next they define a force-flow reachable matrix [@eq:traffic_ffr].
+
+$$
+FFR_{i,j}=\left\{
+  \begin{array}{ll}
+    1 ,& S^{FF}_{i,j}m\Delta{t}-Dist_{i,j}\geq0 \\
+    0 ,& otherwise
+  \end{array}
+  \right.
+  ,\forall v_i,v_j\in V
+$${#eq:traffic_ffr}
+
+Where $Dist$ is a distance matrix, $S^{FF}_{i,j}$ is a *soft-flow speed* between $v_i$ and $v_j$, it can be interpreted as average speed that agent would travel from $v_i$ to $v_j$.
+
+Each element of $FFR$ matrix tells whether an agent can travel from $v_i$ to $v_j$ in $m$ timesteps $\Delta t$.
+
+Then finally we can formulate a Traffic GCN ([@eq:traffic_gcn]).
+
+$$
+GC^k_t=(W_{gc_k}\odot\tilde{A}^k\odot{FFR})x_t
+$${#eq:traffic_gcn}
+
+Where $\odot$ is element-wise matrix multiplication.
+
+Then we can use output of this Traffic GCN as input to vanilla LSTM, as it shown on [@fig:traffic_architecture].
 
 ![Purposed architecture](traffic_architecture.png){#fig:traffic_architecture}
 

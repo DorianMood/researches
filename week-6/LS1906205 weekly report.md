@@ -63,7 +63,46 @@ They acheaved a great performance on the same dataset as [@karpathy_large-scale_
 
 # 3. End-to-End Object Detection with Transformers
 
+In [@carion_end--end_2020] authors propose a way of object detection with the use of transformers. First, I wanna talk about abilities and limitations of the final model. It's impossible to train this model without object recognition part (with only object window detection) because the final loss stonily depends on classification loss. It is important to use *backbone CNN* before feeding data to transformer because it reduces a dimensionality and improves performance. Position encoding is also required because transformers are position invariant.
 
+This model can be used in object detection task [@fig:object-detection], visualizing attention, panoptic segmentation (segmentation based on object contained in segment) [@fig:panoptic-segmentation].
+
+![Object detection](transformer-object-detection-results.png){#fig:object-detection}
+
+![Panoptic segmentation](transformer-object-detection-image-clustering.png){#fig:panoptic-segmentation}
+
+Now about architecture [@fig:architecture-transformer]. In general it consists of following steps:
+
+1. Encode image with CNN. Obtain intermediate representations.
+2. Flatten it and apply positional encoding.
+3. Pass through transformer and obtain box predictions.
+
+![Architecture](transformer-object-detection-architecture.png){#fig:architecture-transformer}
+
+Let me explain architecture in detail [@fig:architecture-details].
+
+1. Backbone network. Here we can use any CNN as backbone, we just cut the upper layers to get some kind of intermediate feature representations.
+2. Positional encoding. Actually this is a part of classical transformer architecture. It is obvious that we need somehow encode obtained features before passing it through transformer, because we positional characteristics of output boxes is important too.
+3. Transformer encoder is just original encoder. It outputs transformed embeddings.
+4. Transformer decoder gets those embeddings and use as keys and values. Queries, however in this architecture are obtained during training process. It can bee seen as some kind of local attention [@fig:queries-transformer]. Each qury looks at specific part of an image and trying to find an object borders there.
+
+![Architecture in detail](transformer-object-detection-architecture-deep.png){#fig:architecture-details}
+
+Segmentation architecture can be seen on [@fig:segmentation-architecture].
+
+![Segmentation architecture](transformer-object-detection-architecture-image-clustering.png){#fig:segmentation-architecture}
+
+Visualized encoder attention can be seen on [@fig:object-attention].
+
+![Visualized encoder attention](transformer-object-detection-architecture-self-attention-map.png){#fig:object-attention}
+
+Trained queries can be seen on [@fig:queries-transformer]. In their implementation they used 100 different queries, each of those queries then recognize an object or No-Object class. So the maximum of recognized objects is 100.
+
+![Queries](transformer-object-detection-queries.png){#fig:queries-transformer}
+
+At the very end they apply FFN and softmax.
+
+They used three losses. Two of them are classification loss and object bounded boxes loss.
 
 # 4. Very Deep Convolutional Networks for Large-Scale Image Recognition
 

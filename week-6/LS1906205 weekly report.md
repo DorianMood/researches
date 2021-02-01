@@ -84,7 +84,7 @@ Let me explain architecture in detail [@fig:architecture-details].
 1. Backbone network. Here we can use any CNN as backbone, we just cut the upper layers to get some kind of intermediate feature representations.
 2. Positional encoding. Actually this is a part of classical transformer architecture. It is obvious that we need somehow encode obtained features before passing it through transformer, because we positional characteristics of output boxes is important too.
 3. Transformer encoder is just original encoder. It outputs transformed embeddings.
-4. Transformer decoder gets those embeddings and use as keys and values. Queries, however in this architecture are obtained during training process. It can bee seen as some kind of local attention [@fig:queries-transformer]. Each qury looks at specific part of an image and trying to find an object borders there.
+4. Transformer decoder gets those embeddings and use as keys and values. Queries, however in this architecture are obtained during training process. It can bee seen as some kind of local attention [@fig:queries-transformer]. Each query looks at specific part of an image and trying to find an object borders there.
 
 ![Architecture in detail](transformer-object-detection-architecture-deep.png){#fig:architecture-details}
 

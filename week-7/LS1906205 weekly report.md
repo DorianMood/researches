@@ -17,6 +17,13 @@ There are many applications of GNNs in engineering problems. In [@stanczyk_deep_
 
 Problem from above paragraph can be seen as identifying a topology of underlying graph in dataset. In [@araghi_dynamic_2021] authors try to solve a problem of clustering temporal graph signals, what means that not only graph features, but graph structure is also evolving in time.
 
+There are several problems in GNNs now, two most attractive for researches are:
+
+1. Depth of the network. The network cannot be very deep for two main reasons. First of all the information is being smoothed way too fast and computation cost is too high. There was an approach to construct a really deep network [@chen_simple_2020].
+2. Computation optimization. Even 3-4 layer GNN uses unpredictable growing amount of computations. There were approaches to reduce computational cost [@wu_simplifying_2019][@hamilton_inductive_2017].
+
+Authors in [@yang_spagan_2021] propose an approach that can particularly solve this issue. Especially the second one.
+
 # 1. Deep Graph Convolutional Networks for Wind Speed Prediction
 
 There is a time-series data of several cities in Denmark and Netherlands. The task is to build a model that is able to forecast weather conditions based on already learned data. There were many approaches to model atmosphere as a fluid flow, as well as machine learning approaches. The new way to build a model is considering weather station as nodes in a graph, then learn adjacency matrix from existing data, which then can be used in prediction.
@@ -43,5 +50,40 @@ They then stack three these layers completing it with convolution layer to reduc
 
 One mistake here is that they specified 3 output cities, but both datasets contain 5 and 7 cities.
 
+# 2. SPAGAN: Shortest Path Graph Attention Network
+
+$$
+\vec{h'}_{i,j, (l)}=W^{(k)}\vec{h}_{j, (l-1)}
+$${#eq:spagan_linear}
+
+$$
+\alpha^{(k)}_{i,j,(l)}=\dfrac{exp(\sigma\langle\vec{a},\vec{h'}_{i,(l)}||\vec{h'}_{j,(l)}\rangle)}{\sum_{j\in N_i}exp(\sigma\langle\vec{a},\vec{h'}_{i,(l)}||\vec{h'}_{j,(l)}\rangle)}
+$${#eq:spagan_basic_attention}
+
+$$
+\vec{h'}_{i,(l)}=\sigma'\{aggr^K_{k=1}\{\sum_{j\in N_i}\alpha^{(k)}_{i,j,(l-1)}\vec{h'}_j\}\}
+$${#eq:spagan_basic_feature_update}
+
+$$
+W_{i,j}=\dfrac{1}{K}\sum_{k=1}^{K}{\alpha^(k)_{i,j,\bar{l}}}
+$${#eq:spagan_edge_weight}
+
+$$
+$${#eq:}
+
+$$
+$${#eq:}
+
+$$
+$${#eq:}
+
+$$
+$${#eq:}
+
+$$
+$${#eq:}
+
+$$
+$${#eq:}
 
 # Reference 

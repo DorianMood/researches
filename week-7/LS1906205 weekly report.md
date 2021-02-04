@@ -24,6 +24,8 @@ There are several problems in GNNs now, two most attractive for researches are:
 
 Authors in [@yang_spagan_2021] propose an approach that can particularly solve this issue. Especially the second one.
 
+In CV there is a field of human-object interaction (HOI). In this field the task is to build such models that can given an image output a triplet of \<human, action, object\>. In [@yang_graph-based_2020] authors propose to project objects from an image to some kind of graph. Then they use message passing, project it back and finally apply convolutions to obtain predictions.
+
 # 1. Deep Graph Convolutional Networks for Wind Speed Prediction
 
 There is a time-series data of several cities in Denmark and Netherlands. The task is to build a model that is able to forecast weather conditions based on already learned data. There were many approaches to model atmosphere as a fluid flow, as well as machine learning approaches. The new way to build a model is considering weather station as nodes in a graph, then learn adjacency matrix from existing data, which then can be used in prediction.
@@ -52,38 +54,94 @@ One mistake here is that they specified 3 output cities, but both datasets conta
 
 # 2. SPAGAN: Shortest Path Graph Attention Network
 
+In [@yang_spagan_2021] authors trying to solve a problem of calculating K-hop neighbors. They overcome a huge amount of computations by representing all the K-hop neighbors as a shortest path to that neighbor within a single convolution layer as it is shown on the [@fig:spagan_convolution].
+
+![Spagan convolution](spagan_convolution.png){#fig:spagan_convolution}
+
+Let me explain step by step what is happening in the core of their algorithm. I will first remind how does a regular attention mechanism work. First all the features are linearly transformed [@eq:spagan_linear]
+
 $$
-\vec{h'}_{i,j, (l)}=W^{(k)}\vec{h}_{j, (l-1)}
+\vec{h'}_{i, (l)}=W^{(k)}_{(l)}\vec{h}_{j, (l-1)}
 $${#eq:spagan_linear}
+
+Then attention matrix is calculated [@eq:spagan_basic_attention], where $\vec{a}$ is learnable.
 
 $$
 \alpha^{(k)}_{i,j,(l)}=\dfrac{exp(\sigma\langle\vec{a},\vec{h'}_{i,(l)}||\vec{h'}_{j,(l)}\rangle)}{\sum_{j\in N_i}exp(\sigma\langle\vec{a},\vec{h'}_{i,(l)}||\vec{h'}_{j,(l)}\rangle)}
 $${#eq:spagan_basic_attention}
 
+Afterwards next level feature representation is obtained by [@eq:spagan_basic_feature_update]
+
 $$
 \vec{h'}_{i,(l)}=\sigma'\{aggr^K_{k=1}\{\sum_{j\in N_i}\alpha^{(k)}_{i,j,(l-1)}\vec{h'}_j\}\}
 $${#eq:spagan_basic_feature_update}
 
+In their architecture it is required to know edge weights for calculating the shortest paths [@eq:spagan_edge_weights]
+
 $$
-W_{i,j}=\dfrac{1}{K}\sum_{k=1}^{K}{\alpha^(k)_{i,j,\bar{l}}}
+W_{i,j}=\dfrac{1}{K}\sum_{k=1}^{K}{\alpha^{(k)}_{i,j,\bar{l}}}
 $${#eq:spagan_edge_weight}
 
-$$
-$${#eq:}
+Then Dejkstra algorithm is applied and $P^c$ shortest paths for each $c$ in possible lengths is obtained. Then we select top k shortest paths [@eq:spagan_neighbor_sampling]. This makes an algorithm more predictive in sense of possible amount of neighbors for computation.
 
 $$
-$${#eq:}
+N^c_i=top_k(P^c), k=\tilde{deg_i}*r
+$${#eq:spagan_neighbor_sampling}
+
+Then layer representation is obtained [@eq:spagan_convolution]. Where attention and function $\phi$, that maps a various size paths to fixed size, are used.
 
 $$
-$${#eq:}
+l^c_i=pool^K_{k=1}\{\sum_{p^c_{i,j}\in N^c_i}\alpha^{(k)}_{i,j}\phi(p^c_{i,j})\}
+$${#eq:spagan_convolution}
+
+Attention is calculated by following formula [@eq:spagan_attention].
 
 $$
-$${#eq:}
+\alpha^{(k)}_{i,j}=AT(\vec{h'}_i,\phi(p^c_{i,j})|a_\alpha)
+$${#eq:spagan_attention}
+
+Function $AT$ is calculated in [@eq:spagan_attention_function].
 
 $$
-$${#eq:}
+AT(a,b|\theta)=\dfrac{exp(\sigma\langle\theta,a||b\rangle)}{\sum_{j\in N_i}exp(\sigma\langle\theta,a||b\rangle)}
+$${#eq:spagan_attention_function}
+
+Final node representations are obtained according to [@eq:spagan_second_layer].
 
 $$
-$${#eq:}
+\vec{h}_i=\sigma\{\sum_{c=2}^{C}\beta_cl^c_i\}
+$${#eq:spagan_second_layer}
+
+Where
+
+$$
+\beta_c=AT(\vec{h'}_i,\phi(p^c_{i,j})|a_\beta)
+$${#eq:spagan_second_layer_attention}
+
+There are hyperparameters, that can be adjusted by developer. They give a review of various values of hyperparameters in their paper.
+
+# 3. A Graph-based Interactive Reasoning for Human-Object Interaction Detection
+
+In [@yang_graph-based_2020] authors propose using graph convolution to detect pairwise interaction. On the [@fig:hoi-architecture].
+
+![Architecture](hoi-architecture.png){#fig:hoi-architecture}
+
+Here we can see that first projection to graph space is applied, then graph convolution and finally projection back and recognition.
+
+On [@fig:graph-layer] we can see architecture in detail. In particular there is a clear explanation how is projection applied. We can see that the mechanism doesn't use much parameters, thus computational cost is not really high.
+
+![Projection](hoi-graph-layer.png){#fig:graph-layer}
+
+At the very end of projection function we can see linear combination of two matrices, which then returns a vertex features. So, we ge get a fully-connected graph.
+
+Then we convolve it and get new features. Afterwards convert it back using residual connection from projection part.
+
+On the picture [@fig:whole-architecture] we can see the whole network architecture, we can see that image, person and object features are combined during training. This helps model to learn interaction.
+
+![Network scheme](hoi-whole.png){#fig:whole-architecture}
+
+Quite interesting paper. But writing style is quite difficult.
+
+
 
 # Reference 

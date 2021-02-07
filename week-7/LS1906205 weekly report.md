@@ -26,6 +26,8 @@ Authors in [@yang_spagan_2021] propose an approach that can particularly solve t
 
 In CV there is a field of human-object interaction (HOI). In this field the task is to build such models that can given an image output a triplet of \<human, action, object\>. In [@yang_graph-based_2020] authors propose to project objects from an image to some kind of graph. Then they use message passing, project it back and finally apply convolutions to obtain predictions.
 
+Scaling models is always a problem in deep learning. Model can work well on small datasets, but in case of large datasets there could be a problems. At the end everything depends on computation complexity and memory complexity. In [@gao_large-scale_2018] authors propose a model that is scalable on large graphs.
+
 # 1. Deep Graph Convolutional Networks for Wind Speed Prediction
 
 There is a time-series data of several cities in Denmark and Netherlands. The task is to build a model that is able to forecast weather conditions based on already learned data. There were many approaches to model atmosphere as a fluid flow, as well as machine learning approaches. The new way to build a model is considering weather station as nodes in a graph, then learn adjacency matrix from existing data, which then can be used in prediction.
@@ -142,6 +144,8 @@ On the picture [@fig:whole-architecture] we can see the whole network architectu
 
 Quite interesting paper. But writing style is quite difficult.
 
+# 4. Large-Scale Learnable Graph Convolutional Networks
 
+First, this paper is quite old, it's from 2018. Their approach is not really difficult, I am going to introduce their graph convolutional layer and then 
 
 # Reference 

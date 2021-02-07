@@ -146,6 +146,24 @@ Quite interesting paper. But writing style is quite difficult.
 
 # 4. Large-Scale Learnable Graph Convolutional Networks
 
-First, this paper is quite old, it's from 2018. Their approach is not really difficult, I am going to introduce their graph convolutional layer and then 
+First, this paper is quite old, it's from 2018. Their approach is not really difficult, I am going to introduce their graph convolutional layer and then present an entire model and their sampling algorithm. At the end I am going to note pros and cons.
+
+LGCL layer is demonstrated on the [@fig:lgcl-layer]. Here the main idea is to utilize top $k$ greatest values in convolution for each feature in graph. Here we can see that there are 3 features and 6 neighboring nodes. Which then is reduced to $k=4$ top features. As we can see, they decided not to keep initial node features, constructing a new feature rows. Then two 1-d convolutions are being applied.
+
+![LGCL Layer](lgcl-layer.png){#fig:lgcl-layer}
+
+Then using previously defined layer we can construct a whole network by stacking LGCL together. At the end they apply fully-connected layer to obtain new features. They also use residual connections and concatenation for the sake of stability.
+
+![LGCL Network](lgcl-flow.png){#fig:lgcl-flow}
+
+It's trivial to train such network on small dataset, but large datasets, say 1000 nodes and more are much more difficult to train on. On the [@fig:lgcl-sampling] the sampling algorithm is proposed. They randomly select $N_{init}$ nodes and then do BFS to build maximum $N_{init}$ trees.
+
+![Sampling](lgcl-sampling.png){#fig:lgcl-sampling}
+
+Results can be seen down below on [@fig:lgcl-results].
+
+![Results](lgcl-results.png){#fig:lgcl-results}
+
+One more thing: according to their study, whole graph training is slightly more effective then sampling and training. That is understandable.
 
 # Reference 

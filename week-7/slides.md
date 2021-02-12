@@ -110,3 +110,11 @@ $$
 ![Code](../week-6/transformer-object-detection-code.png)
 
 ---
+
+// put loss, put some text, some formulas. The information should be complete within a presentation.
+
+// background overview and motivation, contribution, other works review.
+
+// Stanford university online course on CNN
+
+// CS231n

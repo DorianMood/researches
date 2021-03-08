@@ -145,10 +145,20 @@ In [@Fey_Lenssen_Weichert_Muller_2018] they used B-Spline approximation in convo
 
 # 4. Applications
 
+All the techniques mentioned above work with graph data, the minimal requirement for dataset we want to learn is graph structure. There are various fields to apply graph neural network models.
 
+In [@Yang_Zou_2020] authors use gnn in task of human-object interaction detection.
+
+In [@Gu_Tresp_2020] they apply gnn as intermediate layer in object detection using capsule networks.
+
+Recently there was [@Jin_Xia_Liu_Murata_Kim_2021], where they use gnn to predict emergency medical service demand and model city healthcare infrastructure.
+
+There is an approach [@Cheng_Zhang_He_Chen_Cheng_Lu_2020] to apply graph neural network in action recognition. Authors use temporal dimension to generalize information from a set of video frames.
+
+In [@Cui_Henrickson_Ke_Wang_2020] they propose using gnn in city traffic forecasting.
 
 # 5. Conclusion
 
-
+In general graphs are quite flexible data structure. In several tasks using graphs as an input data shows 
 
 # Reference

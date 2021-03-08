@@ -280,3 +280,23 @@
   month        = {Nov},
   pages        = {4883–4894}
 }
+ @article{Hamilton_Ying_Leskovec_2018,
+  title        = {Inductive Representation Learning on Large Graphs},
+  url          = {http://arxiv.org/abs/1706.02216},
+  abstractnote = {Low-dimensional embeddings of nodes in large graphs have proved extremely useful in a variety of prediction tasks, from content recommendation to identifying protein functions. However, most existing approaches require that all nodes in the graph are present during training of the embeddings; these previous approaches are inherently transductive and do not naturally generalize to unseen nodes. Here we present GraphSAGE, a general, inductive framework that leverages node feature information (e.g., text attributes) to efficiently generate node embeddings for previously unseen data. Instead of training individual embeddings for each node, we learn a function that generates embeddings by sampling and aggregating features from a node’s local neighborhood. Our algorithm outperforms strong baselines on three inductive node-classification benchmarks: we classify the category of unseen nodes in evolving information graphs based on citation and Reddit post data, and we show that our algorithm generalizes to completely unseen graphs using a multi-graph dataset of protein-protein interactions.},
+  note         = {arXiv: 1706.02216},
+  journal      = {arXiv:1706.02216 [cs, stat]},
+  author       = {Hamilton, William L. and Ying, Rex and Leskovec, Jure},
+  year         = {2018},
+  month        = {Sep}
+}
+ @article{Wu_Wan_Yue_Jin_Zhao_Golmant_Gholaminejad_Gonzalez_Keutzer_2017,
+  title        = {Shift: A Zero FLOP, Zero Parameter Alternative to Spatial Convolutions},
+  url          = {http://arxiv.org/abs/1711.08141},
+  abstractnote = {Neural networks rely on convolutions to aggregate spatial information. However, spatial convolutions are expensive in terms of model size and computation, both of which grow quadratically with respect to kernel size. In this paper, we present a parameter-free, FLOP-free “shift” operation as an alternative to spatial convolutions. We fuse shifts and point-wise convolutions to construct end-to-end trainable shift-based modules, with a hyperparameter characterizing the tradeoff between accuracy and efficiency. To demonstrate the operation’s efficacy, we replace ResNet’s 3x3 convolutions with shift-based modules for improved CIFAR10 and CIFAR100 accuracy using 60% fewer parameters; we additionally demonstrate the operation’s resilience to parameter reduction on ImageNet, outperforming ResNet family members. We finally show the shift operation’s applicability across domains, achieving strong performance with fewer parameters on classification, face verification and style transfer.},
+  note         = {arXiv: 1711.08141},
+  journal      = {arXiv:1711.08141 [cs]},
+  author       = {Wu, Bichen and Wan, Alvin and Yue, Xiangyu and Jin, Peter and Zhao, Sicheng and Golmant, Noah and Gholaminejad, Amir and Gonzalez, Joseph and Keutzer, Kurt},
+  year         = {2017},
+  month        = {Dec}
+}

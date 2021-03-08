@@ -58,7 +58,7 @@ Where $h_i^{(l)}$ is a state of node $v_i$ after layer $l$ and $N_i$ are neighbo
 
 ## 3.1. Spectral learning
 
-Spectral learning methods imply eigen-decomposition of graph Laplacian. Similar to Fourier filters, we use graph Laplacian filter. Graph Laplacian [@eq:1] reflects a smoothens of graph, or in other words how different is node from it's neighbors.
+Spectral learning methods imply eigen-decomposition of graph Laplacian. Similar to Fourier filters, we use graph Laplacian filter. Graph Laplacian [@eq:1] reflects a smoothens of graph, or in other words how different is each node from it's neighbors.
 
 $$
 L=A-D
@@ -106,7 +106,7 @@ There is a problem with building a deep networks, because it requires quite a lo
 
 Spatial learning methods are a bit more intuitive, because there is a visual interpretation. All those methods are based on spatial interpretation of graph, convolution is defined as aggregation neighboring nodes information for each node.
 
-In [@Hamilton2017] they propose in some sense improved version of vanilla graph convolution. New algorithm was called GraphSAGE. The main contribution is an idea to use $N(v)$ function for *sampling* neighbors. This function basically takes up to $\gamma$ neighbors of a node instead of taking into account all existing neighboring nodes.
+In [@Hamilton_Ying_Leskovec_2018] they propose in some sense improved version of vanilla graph convolution. New algorithm was called GraphSAGE. The main contribution is an idea to use $N(v)$ function for *sampling* neighbors. This function basically takes up to $\gamma$ neighbors of a node instead of taking into account all existing neighboring nodes.
 
 Aggregator with such setting is determined by [@eq:GraphSAGE_aggregator]. Here max pooling is being used.
 
@@ -147,18 +147,37 @@ In [@Fey_Lenssen_Weichert_Muller_2018] they used B-Spline approximation in convo
 
 All the techniques mentioned above work with graph data, the minimal requirement for dataset we want to learn is graph structure. There are various fields to apply graph neural network models.
 
-In [@Yang_Zou_2020] authors use gnn in task of human-object interaction detection.
+In [@Yang_Zou_2020] authors use gnn in task of human-object interaction detection. They first project two feature tensors (regions of image, recognized as object and human) on graph space, where all nodes are connected. Then message passing is applied, which propagates a given signal through graph. Afterwards they project all the convolved features back to convolutional space and apply fully connected layers to get probabilities.
 
-In [@Gu_Tresp_2020] they apply gnn as intermediate layer in object detection using capsule networks.
+In [@Gu_Tresp_2020] they apply GNN as an intermediate layer in object detection using capsule networks. They use term *capsule* to describe some region of image (for example face features like eyes or nose), which is important for recognition of an object. Then they perform a graph convolution, propagating signal through graph obtained from primary extracted *capsules*. Then concatenate features, reduce dimension and apply fully-connected layer.
 
-Recently there was [@Jin_Xia_Liu_Murata_Kim_2021], where they use gnn to predict emergency medical service demand and model city healthcare infrastructure.
+Recently there was [@Jin_Xia_Liu_Murata_Kim_2021], where they use gnn to predict emergency medical service demand and model city healthcare infrastructure. They have bipartite graph of regions and hospitals. They apply graph convolution.
+
+It is clear that applying a GNN or GNN we won't get any adequate results. Graph structure is too specific [@eq:bigcn_adjacency_matrix_structure].
+
+$$
+A=\begin{bmatrix}
+  0_{M\times M} & B_u \\
+  B_v & 0_{N\times N}\\
+\end{bmatrix}
+$${#eq:bigcn_adjacency_matrix_structure}
+
+Where $B_u$ and $B_v$ are adjacency matrixes for hospital nodes $u\in U$ and for regions $v\in V$ and other elements are zeros because we know the graph is bipartite (node from $U$ can only be connected to node from $V$ and opposite).
 
 There is an approach [@Cheng_Zhang_He_Chen_Cheng_Lu_2020] to apply graph neural network in action recognition. Authors use temporal dimension to generalize information from a set of video frames.
+
+Given a video mapped skeleton data they want to classify skeleton movement. In this task they again face a problem of locality. For example, classify "clap" we need to know about state of some distant nodes, but some other distant nodes are not as important. So, in case of "clap" we might be interested in states of left and right palms, but less interested in other body parts state. GNN wont work well in this case due to it's k-hop neighbors locality limitation.
+
+Authors purpose a method with the main idea borrowed from CNN's field, which is called Shift convolution [@Wu_Wan_Yue_Jin_Zhao_Golmant_Gholaminejad_Gonzalez_Keutzer_2017]. In CNN shift is a special kind of channel-wise convolution, but with, in some sense, special filters. Each filter contains only one non-zero element, so it can be implemented in more efficient way.
 
 In [@Cui_Henrickson_Ke_Wang_2020] they propose using gnn in city traffic forecasting.
 
 # 5. Conclusion
 
-In general graphs are quite flexible data structure. In several tasks using graphs as an input data shows 
+In general graphs are quite flexible data structure. Using graph data and graph processing algorithms increases performance in different tasks such as classification, time-series forecasting, computer vision tasks etc.
+
+Recent theoretical researches have proposed a convenient and interpretable architectures using spectral and spatial approaches. The vast majority of recent papers mainly develop spatial methods. There were improvements such as simplifying graph convolution, making graph convolution networks really deep, more computationally effective and computationally stable.
+
+
 
 # Reference

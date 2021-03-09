@@ -200,6 +200,8 @@ In general graphs are quite flexible data structure. Using graph data and graph 
 
 Recent theoretical researches have proposed a convenient and interpretable architectures using spectral and spatial approaches. The vast majority of recent papers mainly develop spatial methods. There were improvements such as simplifying graph convolution, making graph convolution networks really deep, more computationally effective and computationally stable.
 
+The first major approach is spectral, which is handy to apply on problems such as state prediction of a constant graph evolving in time or graph classification task, as well as node classification. The architecture is quite neat since it is formulated only in matrix multiplication and factorization terms. In general there is a kernel function which can be any type of function to parametrize graph Laplacian eigenvalues matrix.
 
+The second major approach is spatial. It is mainly used in graph classification, node classification, node labeling. Architecture is suitable for predicting completely unseen nodes. In general function of neighbors is learned. There are also approaches where we learn adjacency matrix.
 
 # Reference

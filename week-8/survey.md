@@ -39,7 +39,7 @@ After summarizing the main concepts of CNNs we can then start thinking about app
 
 Traditionally there are two completely different group of methods in graph learning.
 
-**Spectral methods** are based on graph Laplacian matrix and it's eigen-decomposition (details will be shown next). There are several points to notice at first: Spectral methods are slightly more difficult and intuition is not obvious; To apply spectral convolution a fixed size graph is required for both learning and evaluation process (so, it can be used on such datasets as human skeleton or other fixed-size small graphs); In general case graph has to be undirected.
+**Spectral methods** are based on graph Laplacian matrix and it's eigen-decomposition (details will be shown next). There are several points to notice at first: Spectral methods are slightly more difficult and intuition is not obvious; To apply spectral convolution a fixed size graph is required for both learning and evaluation process (so, it can be used on such datasets as human skeleton or other fixed-size small graphs).
 
 **Spatial methods** are more intuitive for those who familiar with CNNs since in these methods neighbor aggregation is almost similar with neighbor aggregation in CNNs. Since spatial methods can be applied on graphs with arbitrary size and arbitrary structure (instead fixed size in case of spectral methods), it leads to computational instability of spatial methods.
 
@@ -60,13 +60,21 @@ Where $h_i^{(l)}$ is a state of node $v_i$ after layer $l$ and $N_i$ are neighbo
 
 ## 3.1. Spectral learning
 
-Spectral learning methods imply eigen-decomposition of graph Laplacian. Graph Laplacian [@eq:1] reflects a smoothens of graph, or in other words how different is each node from it's neighbors. Then similar to Fourier filters, we use graph Laplacian filter [@eq:3].
+Spectral learning methods imply eigen-decomposition of graph Laplacian. Graph Laplacian [@eq:1] reflects a smoothens of graph, or in other words how different is each node from it's neighbors. Eigen-decomposition is a representation of matrix with it's eigenvectors and eigenvalues [@eq:eigen_decomposition]. Eigenvectors are thought as an independent components and eigenvalues as a frequencies or strengths of those components. Then similar to Fourier filters, we use graph Laplacian filter [@eq:3] which basically affects eigenvalues diagonal matrix.
 
 $$
 L=A-D
 $${#eq:1}
 
-Paper [@Kipf_Welling_2017] is one of the earliest works in sphere of geometric deep learning. Since they did want graph Laplacian matrix to reflect smoothens of the graph, but they also needed a numerical stability, they used a slightly different form of graph Laplacian [@eq:2], and it is called *renormalization trick*.
+Where $L$ is graph Laplacian, $A$ is graph adjacency matrix, $D$ is a diagonal degree matrix. Each element of diagonal represents a number of edges $e$ attached to this vertex. Graph Laplacian also has different forms such as normalized Laplacian, which is still symmetric.
+
+$$
+L=U\Lambda U^T
+$${#eq:eigen_decomposition}
+
+Where $U$ is a matrix of concatenated eigenvectors and $\Lambda$ is a diagonal matrix of eigenvalues.
+
+Paper [@Kipf_Welling_2017] is one of the earliest works in sphere of geometric deep learning. Since they did want graph Laplacian matrix to reflect smoothens of the graph, but they also needed a numerical stability, they used a slightly different form of graph Laplacian [@eq:2], Normalized Laplacian. It is quite common form of defining graph Laplacian.
 
 $$
 L=\tilde{D}^{-\dfrac{1}{2}}\tilde{A}\tilde{D}^{-\dfrac{1}{2}}
@@ -82,7 +90,7 @@ $${#eq:3}
 
 Where $U\Lambda U^T$ is eigen-decomposition of $L$. $U$ is matrix of eigen-vectors and $\Lambda$ is diagonal matrix of eigen-values. So $g_\theta(\Lambda)$ parametrizes this diagonal matrix with learnable parameters.
 
-Since in undirected graphs $A$ is symmetric, graph Laplacian $L$ is also symmetric, which means that such matrix has $N$ unique eigen-values and corresponding eigen-vectors.
+Since graph Laplacian $L$ is symmetric, such matrix has $N$ unique eigen-values and corresponding eigen-vectors. It means that all eigenvectors of $L$ are orthogonal, in other words they independently encode certain part of $L$.
 
 In [@Defferrard_Bresson_Vandergheynst_2016] authors propose using Chebyshev polynomials as a filter kernel [@eq:5]
 
@@ -100,13 +108,23 @@ $${#eq:6}
 
 Where $c$ and $h$ are optimized during training and $Re$ returns a real part of complex number. They call $h$ spectral zoom, this learnable parameter in essence determines what frequencies are more important and what frequencies are less important in graph spectrum.
 
-In [@Monti_Otness_Bronstein_2018] they used a notion of *motifs* - small directed graphs to encode original graph structure. Benefit from such approach is that since we encode graph before convolution, it is not required to be undirected. In [@Dwivedi_Bresson_2020] they applied transformer [@Vaswani_Shazeer_Parmar_Uszkoreit_Jones_Gomez_Kaiser_Polosukhin_2017] architecture on graph, they used graph Laplacian eigenvalues as a positional encoding.
+In [@Monti_Otness_Bronstein_2018] they used a notion of *motifs* - small directed graphs to encode original graph structure. So they compressed an original adjacency matrix and made it symmetric.
 
-There is a problem with building a deep networks, because it requires quite a lot of matrix multiplications to compute, and what is more important, each layer needs a matrix of learnable parameters. In [@Wu_Zhang_Souza_Jr_Fifty_Yu_Weinberger_2019] they claim that only one matrix of parameter is needed, and that we can simplify multiple layers of graph convolution to one single layer, they proposed. Only one parameter matrix will be needed, therefore number of multiplications will dramatically decrease. Recently there was another approach in [@Chen_Wei_Huang_Ding_Li_2020], they introduced a residual connection from initial state, so they solved an oversmoothing problem, which is quite common in spectral architectures. The signal decays quite fast, and usually stacking no more then 4 layers are used. They reached a reasonable performance with their residual architecture on up to 64 layers deep network.
+In [@Dwivedi_Bresson_2020] they applied transformer [@Vaswani_Shazeer_Parmar_Uszkoreit_Jones_Gomez_Kaiser_Polosukhin_2017] architecture on graph, they used graph Laplacian eigenvalues as a positional encoding.
+
+There is a problem with building a deep networks, because it requires quite a lot of matrix multiplications to compute, and what is more important, each layer needs a matrix of learnable parameters. In [@Wu_Zhang_Souza_Jr_Fifty_Yu_Weinberger_2019] they claim that only one matrix of parameter is needed, and that we can simplify multiple layers of graph convolution to one single layer, they proposed. Only one parameter matrix will be needed, therefore number of multiplications will dramatically decrease. Update rule for $K$ layer can be seen in [@eq:sgc].
+
+$$
+\hat{Y}_{SGC}=softmax(L^KX\Theta)
+$${#eq:sgc}
+
+Recently there was another approach in [@Chen_Wei_Huang_Ding_Li_2020], they introduced a residual connection from initial state, so they solved an oversmoothing problem, which is quite common in spectral architectures. The signal decays quite fast, and usually stacking no more then 4 layers are used. They reached a reasonable performance with their residual architecture on up to 64 layers deep network.
 
 ## 3.2. Spacial learning
 
-Spatial learning methods are a bit more intuitive, because there is a visual interpretation. All those methods are based on spatial interpretation of graph, convolution is defined as aggregation neighboring nodes information for each node.
+Spatial learning methods are a bit more intuitive, because there is a visual interpretation. All those methods are based on spatial interpretation of graph, convolution is defined as aggregation neighboring nodes information for each node [@fig:graph-spatial-convolution].
+
+![Graph spatial convolution](graph-spatial-convolution.png)
 
 In [@Hamilton_Ying_Leskovec_2018] they propose in some sense improved version of vanilla graph convolution. New algorithm was called GraphSAGE. The main contribution is an idea to use $N(v)$ function for *sampling* neighbors. This function basically takes up to $\gamma$ neighbors of a node instead of taking into account all existing neighboring nodes.
 
@@ -116,11 +134,11 @@ $$
 AGGREGATE^{pool}_k=max({\sigma(W_{pool}h^k_{u_i}+b), \forall_{u_i}\in N(v)})
 $${#eq:GraphSAGE_aggregator}
 
-In fact we learn function of neighbors instead of calculating a whole graph embeddings, what allows us to apply same learned function on a new completely unseen nodes. In [@Gao_Wang_Ji_2018] similar approach is being used. Since one layer propagates signal to from (or to) one-hop neighbors, we need $d$ depth tree for each node to propagate a signal through $d$ layers. They first build a subtrees fro each node, sampling neighbors, then propagate a signal. It is also important that they use skip connections, it works similar to residual layer from [@He_Zhang_Ren_Sun_2015].
+In fact we learn function of neighbors instead of calculating a whole graph embeddings, what allows us to apply same learned function on a new completely unseen nodes. In [@Gao_Wang_Ji_2018] similar approach is being used. Since one layer propagates signal to from (or to) one-hop neighbors, we need $d$ depth tree for each node to propagate a signal through $d$ layers. They first build a subtrees for each node, sampling neighbors, then propagate a signal. It is also important that they use skip connections, it works similar to residual layer from [@He_Zhang_Ren_Sun_2015].
 
-Similar to [@Vaswani_Shazeer_Parmar_Uszkoreit_Jones_Gomez_Kaiser_Polosukhin_2017], in [@Velicković_Cucurull_Casanova_Romero_Liò_Bengio_2017] authors purpose attention mechanism, which can be simply thought as an additional learnable parameter.
+Similar to transformer[@Vaswani_Shazeer_Parmar_Uszkoreit_Jones_Gomez_Kaiser_Polosukhin_2017], in [@Velicković_Cucurull_Casanova_Romero_Liò_Bengio_2017] authors purpose attention mechanism, which can be simply thought as an additional learnable parameter.
 
-Attention can be calculated using following formula [@eq:7]:
+Attention for $e_{ij}$ can be calculated using following formula [@eq:7]:
 
 $$
 \alpha_{i,j}=\dfrac{exp(LeakyReLU(\vec{a}^T[W\vec{h_i}||W\vec{h_j}]))}{\sum_{k\in N_i}exp(LeakyReLU(\vec{a}^T[W\vec{h_i}||W\vec{h_k}]))}
@@ -141,15 +159,13 @@ So, attention is a method to weight an edge according to its importance to node.
 
 In [@Bai_Cui_Jiao_Rossi_Hancock_2019] authors propose a way to surpass limitation of fixed-size graph by *aligning* graph to some known graphs, they call such graphs *backtrackless aligned grid*. Then apply spatial convolution.
 
-In [@Yang_Wang_Song_Yuan_Tao_2021] they use shortest path to compute Dejkstra algorithm to build a subtree, so they avoid redundant computations and the paths are more unique, which also helps to aggregate information more effective and helps to take into account remote neighbors in more stable way.
-
-In [@Fey_Lenssen_Weichert_Muller_2018] they used B-Spline approximation in convolution kernel. The main advantage of their approach is that 
+In [@Yang_Wang_Song_Yuan_Tao_2021] they use shortest path to compute Dejkstra algorithm to build a subtree, so they avoid redundant computations and the paths are more unique, which also helps to aggregate information more effective and helps to take into account remote neighbors in more stable way. In [@Fey_Lenssen_Weichert_Muller_2018] they used B-Spline approximation in convolution kernel. 
 
 # 4. Applications
 
 All the techniques mentioned above work with graph data, the minimal requirement for dataset we want to learn is graph structure. There are various fields to apply graph neural network models.
 
-In [@Yang_Zou_2020] authors use gnn in task of human-object interaction detection. They first project two feature tensors (regions of image, recognized as object and human) on graph space, where all nodes are connected. Then message passing is applied, which propagates a given signal through graph. Afterwards they project all the convolved features back to convolutional space and apply fully connected layers to get probabilities.
+In [@Yang_Zou_2020] authors use GNN in task of human-object interaction detection. They first project two feature tensors (regions of image, recognized as object and human) on graph space, where all nodes are connected. Then message passing is applied, which propagates a given signal through graph. Afterwards they project all the convolved features back to convolutional space and apply fully connected layers to get probabilities.
 
 In [@Gu_Tresp_2020] they apply GNN as an intermediate layer in object detection using capsule networks. They use term *capsule* to describe some region of image (for example face features like eyes or nose), which is important for recognition of an object. Then they perform a graph convolution, propagating signal through graph obtained from primary extracted *capsules*. Then concatenate features, reduce dimension and apply fully-connected layer.
 
@@ -172,7 +188,11 @@ Given a video mapped skeleton data they want to classify skeleton movement. In t
 
 Authors purpose a method with the main idea borrowed from CNN's field, which is called Shift convolution [@Wu_Wan_Yue_Jin_Zhao_Golmant_Gholaminejad_Gonzalez_Keutzer_2017]. In CNN shift is a special kind of channel-wise convolution, but with, in some sense, special filters. Each filter contains only one non-zero element, so it can be implemented in more efficient way.
 
-In [@Cui_Henrickson_Ke_Wang_2020] they propose using gnn in city traffic forecasting.
+In [@Cui_Henrickson_Ke_Wang_2020] they propose using gnn in city traffic forecasting. Their approach is based on $FFR$ matrix, which reflects a traffic flow and can be computed from experimental data directly. So we can compute a future step for traffic system from initial step up to step $k$ [@eq:traffic_gcn].
+
+$$
+g\star x^k_t=(W_k\odot\tilde{A}^k\odot{FFR})x_t
+$${#eq:traffic_gcn}
 
 # 5. Conclusion
 

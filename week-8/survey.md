@@ -204,4 +204,9 @@ The first major approach is spectral, which is handy to apply on problems such a
 
 The second major approach is spatial. It is mainly used in graph classification, node classification, node labeling. Architecture is suitable for predicting completely unseen nodes. In general function of neighbors is learned. There are also approaches where we learn adjacency matrix.
 
+
+# scene graph generation
+# image captioning
+# segmentation
+
 # Reference

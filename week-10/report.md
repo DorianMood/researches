@@ -47,6 +47,12 @@ For the second and third steps different algorithm are being used. Next authors 
 
 **RNN/LSTM-based SGG** utilizes recursive architecture to label triplets. There are many different architectures. Some use visual attention, some use context information fusion.
 
-**Graph-based SGG**
+**Graph-based SGG** uses Graph convolution to generate a scene graph. First object regions proposals are detected and being used as nodes in graph.
+
+Let me give a small introduction on methods used specifically in Graph-based approaches:
+
+1. Factorizable Net [@Li_Ouyang_Zhou_Shi_Zhang_Wang_2018] builds a fully connected graph from object proposals, then merge edges corresponding to similar regions.
+2. Graph R-CNN [@Yang_Lu_Lee_Batra_Parikh_2018] does it similarly taking object proposals, building fully-connected graph, then pruning edges and utilizes GAT to label relations.
+3. 
 
 # Reference

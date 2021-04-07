@@ -35,6 +35,18 @@ The general pipeline of graph scene generations consists of following steps:
 2. Object-relation-subject SGG triplets are constructed from primary detected objects.
 3. One from the variety of Scene Graph Generation (SGG) algorithms is applied.
 
-Since the first step is an independent CV field, one of the existing algorithm can be used, such as 
+Since the first step is an independent CV field, one of the existing algorithm can be used, such as Faster RCNN [@Ren_He_Girshick_Sun_2016].
+
+For the second and third steps different algorithm are being used. Next authors describe some of them:
+
+**CRF-based SGG** is a classical tool, which has been widely used before, but now is not really popular.
+
+**TransE-based SGG** regards the relationship as a translation between the head entity and the tail entity. Relationship is modeled as a simple vector transformation. There are two modules: visual module which extracts visual features and language module which labels triplets with corresponding values.
+
+**CNN-based SGG** uses Spatial, Visual and Semantic modules to learn corresponding features of triplets. There are many different approaches here, one of the key problems is a computational complexity, which need to be reduced.
+
+**RNN/LSTM-based SGG** utilizes recursive architecture to label triplets. There are many different architectures. Some use visual attention, some use context information fusion.
+
+**Graph-based SGG**
 
 # Reference

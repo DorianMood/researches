@@ -53,6 +53,11 @@ Let me give a small introduction on methods used specifically in Graph-based app
 
 1. Factorizable Net [@Li_Ouyang_Zhou_Shi_Zhang_Wang_2018] builds a fully connected graph from object proposals, then merge edges corresponding to similar regions.
 2. Graph R-CNN [@Yang_Lu_Lee_Batra_Parikh_2018] does it similarly taking object proposals, building fully-connected graph, then pruning edges and utilizes GAT to label relations.
-3. 
+
+There is a prior knowledge we can extract from image. Language prior is quite obvious and it stands for the fact that some object could "borrow" relation information from similar objects. For example "girl rides horse" is quite similar to "girl rides elephant" or "woman rides elephant". Another prior is statistical prior, which basically stands for adequateness of predicted relation triplet. For example "cat eats fish" is quite probable prediction, however "fish eats cat" is not really probable. The last prior is knowledge graph, which stands for real world ground-truth data. In other words, according to knowledge graph we can understand could given two objects relate to each other or not. 
+
+Prior knowledge has been proven to significantly improve the quality of scene graph generation.
+
+
 
 # Reference

@@ -2,7 +2,7 @@
 
 This week I've rad:
 
-    - [x] Scene Graphs: A Survey of Generations and Applications
+    - [x] Bipartite Graph Network with Adaptive Message Passing for Unbiased Scene Graph Generation
 
 
 ## Compile 

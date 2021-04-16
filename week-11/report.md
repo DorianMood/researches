@@ -23,4 +23,8 @@ They employ message passing to capture scene context. Several message passing st
 
 They use both relationship and message passing error in their cost function as well as the relationship proposal and detected objects.
 
+# 2. Probabilistic Modeling of Semantic Ambiguity for Scene Graph Generation
+
+
+
 # Reference

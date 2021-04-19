@@ -7,6 +7,7 @@ This week I've rad:
 This week I need to do:
 
 - [x] Scene graph generation for image compression (take a look on existing papers)
+- [ ] Implement scene graph generation
 - [ ] Application niche and scenario, motivation.
 - [ ] Prepare different application variants and scenarios, how and where exactly we can use it.
 - [ ] Compare scene graph and JPEG sizes.

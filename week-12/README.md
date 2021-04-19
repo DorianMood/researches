@@ -12,4 +12,4 @@ This week I need to do:
 - [ ] Compare scene graph and JPEG sizes.
 
 ## Compile 
-`pandoc --filter pandoc-crossref --filter pandoc-citeproc --template=template.latex '<input.md>' -o '<output.pdf>'
+`pandoc --filter pandoc-crossref --filter pandoc-citeproc --template=template.latex '<input.md>' -o '<output.pdf>'`

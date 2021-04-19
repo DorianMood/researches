@@ -11,4 +11,4 @@
  - [x] CayleyNets. Graph convolutional neural networks with complex rational spectral filters
 
 ## Compile 
-`pandoc --filter pandoc-citeproc --filter pandoc-crossref  --template=template.latex '<input.md>' -o '<output.pdf>'
+`pandoc --filter pandoc-citeproc --filter pandoc-crossref  --template=template.latex '<input.md>' -o '<output.pdf>'`

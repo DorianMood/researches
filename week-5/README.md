@@ -10,4 +10,4 @@
  - [x] Traffic Graph Convolutional Recurrent Neural Network: A Deep Learning Framework for Network-Scale Traffic Learning and Forecasting
 
 ## Compile 
-`pandoc --filter pandoc-crossref --filter pandoc-citeproc --template=template.latex '<input.md>' -o '<output.pdf>'
+`pandoc --filter pandoc-crossref --filter pandoc-citeproc --template=template.latex '<input.md>' -o '<output.pdf>'`

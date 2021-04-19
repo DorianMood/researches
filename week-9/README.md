@@ -1,8 +1,8 @@
 # Week 9
 
-This week I've rad:
+This week I did:
 
-    - [x] 
+- [x] Survey
 
 
 ## Compile 

@@ -2,7 +2,7 @@
 
 This week I've rad:
 
-    - [x] Scene Graphs: A Survey of Generations and Applications
+- [x] Scene Graphs: A Survey of Generations and Applications
 
 
 ## Compile 

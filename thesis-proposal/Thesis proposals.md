@@ -13,4 +13,18 @@ autoSectionLabels: True
 
 # Introduction
 
+# Project statement
+
+# Approach and methodology
+
+# Data
+
+# Potential outcomes
+
+# Potential limitations
+
+# Contributions
+
+# Dissertation chapters
+
 # Reference

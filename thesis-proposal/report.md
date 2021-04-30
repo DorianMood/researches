@@ -1,7 +1,8 @@
 ---
 bibliography: [index.bib]
-title: Nikita 道尔格 LS1906205
+title: Nikita LS1906205
 subtitle: weekly report
+date: /today
 author:
   - name: Nikita Dolgoshein
     affiliation: Beihang University
@@ -11,26 +12,32 @@ csl: [ieee.csl]
 autoSectionLabels: True
 ---
 
-# 1. Bipartite Graph Network with Adaptive Message Passing for Unbiased Scene Graph Generation
+# Introduction
 
-In [@Li_Zhang_Wan_He_2021] authors use bipartite graph in their Scene Graph Generation (SGG) algorithm. They threat objects and relations as a different types of nodes in a bipartite graph, so their graph consists of two node types: $V_r$ and $V_o$.
+This is a simple introduction [@fig:fig1] [@eq:equation1]
 
-Authors use a Faster R-CNN as a backbone network, which is a quite classic choice. After that relation proposals are generated. Generated proposals are built out from convolutional features from the top of backbone network, its spatial information from bounding box and the meaningfully information about class of detected objects. On this stage two fully-connected networks are used to learn the final projection.
+![This is a figure](../week-10/application.png){#fig:fig1}
 
-Nextly, after relationship proposals being obtained, bipartite graph (mentioned above) is built. Using another learnable transformation, relationship confidence is calculated based on both objects and relation information.
+$$
+x=x+1
+$${#eq:equation1}
 
-They employ message passing to capture scene context. Several message passing steps with learnable functions are applied, after which the network captures neighborhood information.
+TTTThe option --from=markdown tells that input file is a Markdown file. Markdown extensions +tex_math_single_backslash and +tex_math_dollars enable Pandoc to parse equations.
 
-They use both relationship and message passing error in their cost function as well as the relationship proposal and detected objects.
+Pandoc-citeproc enables us to use citations in Markdown. Pandoc installation includes it by default. We need to enable it by using the option --filter pandoc-citeproc.
 
-# 2. Probabilistic Modeling of Semantic Ambiguity for Scene Graph Generation
+We can execute the Makefile command in the terminal as follows.he option --from=markdown tells that input file is a Markdown file. Markdown extensions +tex_math_single_backslash and +tex_math_dollars enable Pandoc to parse equations.
 
-In [@Yang_Zhang_Zhang_Wu_Yang_2021] they consider a problem of uncertainty while predicting relationship label. Exactly one relation can be labeled differently, such as "human holding umbrella" and "human carrying umbrella". This problem is called *semantic ambiguity*.
+Pandoc-citeproc enables us to use citations in Markdown. Pandoc installation includes it by default. We need to enable it by using the option --filter pandoc-citeproc.
 
-In this paper authors employ probabilistic certainty for the soak of predicting labels more accurate, and not ot miss some of the predictions. As it's shown on the [@fig:pum].
+We can execute the Makefile command in the terminal as follows.he option --from=markdown tells that input file is a Markdown file. Markdown extensions +tex_math_single_backslash and +tex_math_dollars enable Pandoc to parse equations.
 
-![](PUM.png){#fig:pum}
+Pandoc-citeproc enables us to use citations in Markdown. Pandoc installation includes it by default. We need to enable it by using the option --filter pandoc-citeproc.
 
-Instead of message passing they use stochastic regression to obtain relationship label probabilities.
+We can execute the Makefile command in the terminal as follows.he option --from=markdown tells that input file is a Markdown file. Markdown extensions +tex_math_single_backslash and +tex_math_dollars enable Pandoc to parse equations.
+
+Pandoc-citeproc enables us to use citations in Markdown. Pandoc installation includes it by default. We need to enable it by using the option --filter pandoc-citeproc.
+
+We can execute the Makefile command in the terminal as follows.
 
 # Reference

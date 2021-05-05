@@ -17,7 +17,7 @@ Nowadays there are many existing image compression approaches. We can divide suc
 
 For now a general approach is to encode an image to compressed representation using convolutional neural network and take the convolutional features from one of the top layers of network. In this work author is going to use a slightly different architecture. There were many publications connected to graph convolution in recent years. Early publications introduced a graph convolution, later the main approaches had been formed. It is important to mention that even though the first application were obviously connected to graph classification () and graph clustering (), in recent years application domain has been extended to action recognition (), supply-demand prediction (), time series prediction (), traffic and wind prediction () and many others.
 
-In this work author is going to use existing graph convolution algorithms to generate a representation of an image that takes less space and can be transported or stored more effectively. The core of this framework is scene graph representation of an image.
+In this work author is going to apply graph convolution algorithms to generate a representation of an image that takes less space and can be transported or stored more effectively. The core of this framework is scene graph representation of an image.
 
 # Project statement
 

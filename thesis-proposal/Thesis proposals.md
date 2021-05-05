@@ -21,9 +21,17 @@ In this work author is going to use existing graph convolution algorithms to gen
 
 # Project statement
 
-The first question is how do we memorize some image or visual scene in our life. We do not operate in terms of pixels or object coordinates. More likely we use something like scheme, which describes the most important parts of an image
+The first question is how do we memorize some image or visual scene in our life. We do not operate in terms of pixels or object coordinates. More likely we use something like scheme, which describes the most important parts of an image as it shown on [@fig:image_and_scene_graph].
+
+![Image and scene graph associated with it](Image%20and%20scene%20graph.png){#fig:image_and_scene_graph}
+
+The scene graph represented on the figure above is simplified, real graph can also have node attributes different from just an object label, for example in case of hair we can also attach an attribute "brown" and "curly".
+
+There are algorithms that can extract a scene graph from an image. There were some approaches to generate image based on scene graph. So the idea is quite obvious: let us combine those two algorithms to build a compression algorithm prototype. From general point of view we can see such algorithm as an autoencoder with Scene Graph Generation network as encoder and Scene Graph to Image network as decoder.
 
 # Approach and methodology
+
+
 
 # Data
 

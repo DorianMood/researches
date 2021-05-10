@@ -76,7 +76,15 @@ As we can see from the figure, we first take a scene graph and based on objects 
 
 # Data
 
-Author decided to use Visual Genome dataset, which has been used in many other works [@Krishna_Zhu_Groth_Johnson_Hata_Kravitz_Chen_Kalantidis_Li_Shamma_etal_2016]. Visual genome consists of more than 100,000 images labeled with scene graphs. 
+Author decided to use Visual Genome dataset, which has been used in many other works [@Krishna_Zhu_Groth_Johnson_Hata_Kravitz_Chen_Kalantidis_Li_Shamma_etal_2016]. Visual genome consists of more than 100,000 images labeled with scene graphs.
+
+Dataset consists of several main parts:
+
+1. Images.
+2. Detected objects information (coordinates of rectangles for each object, objects labels, objects attributes).
+3. Scene graphs, obtained from images.
+
+Images are in JPEG format with various height and width.
 
 # Potential outcomes
 

@@ -1,5 +1,5 @@
 ---
-bibliography: [index.bib]
+bibliography: [content/index.bib]
 title: Nikita LS1906205
 subtitle: weekly report
 author:
@@ -7,7 +7,7 @@ author:
     affiliation: Beihang University
     location: Beijing
     email: nikita01051997@gmail.com
-csl: [ieee.csl]
+csl: [./content/ieee.csl]
 autoSectionLabels: True
 ---
 

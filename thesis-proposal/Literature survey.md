@@ -17,7 +17,7 @@ Convolutional neural networks have shown a high performance in several fields du
 
 Nowadays CNNs are used in a variety of tasks such as classification, generation, clustering, dimensionality reduction etc. The main disadvantage of CNNs, however, is that it is domain specific. Due to grid nature of CNN, it is quite challenging to apply such architecture on such objects as road map, molecule or even human skeleton etc. Let me remind that all the listed objects are traditionally modeled as some kind of graph [@fig:1]. It is clear that it's impossible to apply CNN on graph data directly due to it's non-euclidean nature.
 
-![Undirected graph with three types of nodes and weighted edges](graph.png){#fig:1}
+![Undirected graph with three types of nodes and weighted edges](./img/graph.png){#fig:1}
 
 Such structure can be used to describe elements and connections among them. For example human skeleton, where elements are joints and connections are bones. Since graphs are quite representative, we would like to use it directly in all the variety of tasks such as graph classification, node classification, labeling etc. There are many approaches in recent years to apply mentioned above convolutional architecture on graph structured data.
 
@@ -124,7 +124,7 @@ Recently there was another approach in [@Chen_Wei_Huang_Ding_Li_2020], they intr
 
 Spatial learning methods are a bit more intuitive, because there is a visual interpretation. All those methods are based on spatial interpretation of graph, convolution is defined as aggregation neighboring nodes information for each node [@fig:graph-spatial-convolution].
 
-![Graph spatial convolution](graph-spatial-convolution.png)
+![Graph spatial convolution](./img/graph-spatial-convolution.png)
 
 In [@Hamilton_Ying_Leskovec_2018] they propose in some sense improved version of vanilla graph convolution. New algorithm was called GraphSAGE. The main contribution is an idea to use $N(v)$ function for *sampling* neighbors. This function basically takes up to $\gamma$ neighbors of a node instead of taking into account all existing neighboring nodes.
 

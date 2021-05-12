@@ -1,9 +1,9 @@
 pdf:
 	pandoc  \
-    --pdf-engine=xelatex \
+		--pdf-engine=xelatex \
 		--filter=pandoc-crossref \
 		--filter=pandoc-citeproc \
-    --include-in-header=templates/preamble.latex \
+		--include-in-header=templates/preamble.latex \
 		--output thesis.pdf \
 		--template=templates/template.latex \
 		--variable=fontsize:12pt \
@@ -14,7 +14,7 @@ pdf:
 		--bibliography=content/index.bib \
 		--csl=content/ref.csl \
 		--number-sections \
-    --resource-path=content
+		--resource-path=content
 
 clean:
 	rm tex2pdf* -r

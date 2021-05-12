@@ -1,4 +1,4 @@
-\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{IEEEtran}
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{article}
 $if(beamerarticle)$
 \usepackage{beamerarticle} % needs to be loaded first
 $endif$
@@ -57,9 +57,21 @@ $endif$
 \usepackage{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-$if(geometry)$
-\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
-$endif$
+
+% Page geometry
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  top=25mm,
+  bottom=25mm,
+  left=30mm,
+  right=20mm
+}
+
+% Line spacing
+\renewcommand{\baselinestretch}{1.5}
+\renewcommand{\fontsize}{12pt}
+
 \usepackage[unicode=true]{hyperref}
 $if(colorlinks)$
 \PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
@@ -217,62 +229,12 @@ $if(subtitle)$
 \subtitle{$subtitle$}
 $endif$
 
-$if(author)$
-\author{
-    $for(author)$
-        \IEEEauthorblockN{$author.name$}
-        \IEEEauthorblockA{%
-            $author.affiliation$ \\
-            $author.location$ \\
-            $author.email$}
-        $sep$ \and
-    $endfor$
-}
-$endif$
-
-$if(institute)$
-\providecommand{\institute}[1]{}
-\institute{$for(institute)$$institute$$sep$ \and $endfor$}
-$endif$
-\date{$date$}
 
 \begin{document}
 $if(title)$
 \maketitle
 $endif$
-$if(abstract)$
-\begin{abstract}
-$abstract$
-\end{abstract}
-$endif$
 
-$if(keywords)$
-\begin{IEEEkeywords}
-$for(keywords)$
-    $keywords$$sep$;
-$endfor$
-\end{IEEEkeywords}
-$endif$
-
-$for(include-before)$
-$include-before$
-
-$endfor$
-$if(toc)$
-{
-$if(colorlinks)$
-\hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$black$endif$}
-$endif$
-\setcounter{tocdepth}{$toc-depth$}
-\tableofcontents
-}
-$endif$
-$if(lot)$
-\listoftables
-$endif$
-$if(lof)$
-\listoffigures
-$endif$
 $body$
 
 $if(natbib)$

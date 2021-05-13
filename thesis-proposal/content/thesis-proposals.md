@@ -1,10 +1,10 @@
 ---
-bibliography: [content/index.bib]
+bibliography: [index.bib]
 title: Nikita LS1906205
 author:
   - name: Nikita Dolgoshein
     affiliation: Beihang University
-csl: [./content/ref.csl]
+csl: [ref.csl]
 ---
 
 # Introduction

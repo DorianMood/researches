@@ -25,7 +25,14 @@ The scene graph represented on the figure above is simplified, real graph can al
 
 There are algorithms that can extract a scene graph from an image. There were some approaches to generate image based on scene graph. So the idea is quite obvious: let us combine those two algorithms to build a compression algorithm prototype. From general point of view we can see such algorithm as an autoencoder with Scene Graph Generation network as encoder and Scene Graph to Image network as decoder.
 
-# Approach and methodology
+# Niches
+
+Potentially this work can improve existing image compression algorithms, since the size of scene graph is way more small than size of JPEG (proof???). Such an algorithm can be used in different scenarios. We selected two possible ones:
+
+1. Limited space on machine with high computational power. It can be a big server with powerful CPU. In recent days there are some movements in quantum computing sphere, so it can be a very powerful machine with quantum CPU etc.
+2. Huge images needed to be transmitted through a network with limited speed. In case of a limited performance of a network we can compress and restore images using application, we are working on.
+
+# Methodology
 
 The main contribution of this work is applying a graph convolution in image compression domain. But let us first define what graph convolution actually is. Convolution is already widely used in image and video processing, and mainly convolutional neural networks (CNNs) consist of stacked layers of such convolutions [@Krizhevsky_Sutskever_Hinton_2017], [@Simonyan_Zisserman_2015]. In many architectures authors use learnable *filters* to get representation of the next layer of a network. Convolutional architecture is not new, but it has been widely spread in the last decade because of enormous computation power growth. The main idea of Graph Convolutional Networks is originated from CNNs and generalizes CNN approach from fixed grid structure to arbitrary grid-like graph structure.
 
@@ -82,21 +89,8 @@ Dataset consists of several main parts:
 
 Images are in JPEG format with various height and width.
 
-# Potential outcomes
-
-Potentially this work can improve existing image compression algorithms, since the size of scene graph is way more small than size of JPEG (proof???). Such an algorithm can be used in different scenarios. We selected two possible ones:
-
-1. Limited space on machine with high computational power. It can be a big server with powerful CPU. In recent days there are some movements in quantum computing sphere, so it can be a very powerful machine with quantum CPU etc.
-2. Huge images needed to be transmitted through a network with limited speed. In case of a limited performance of a network we can compress and restore images using application, we are working on.
-
-# Potential limitations
-
-The main limitation is needed to mention. Since we still don't have even the simplest version of an algorithm, we still cannot see the quality of restored images, there can be a possible problem. This problem can be solved by storing an additional information about an image such as scene and objects convolutional features. In this work we are going to ballance this information size and quality of restored images.
-
 # Contributions
 
 The contribution of this work can be considered from two major perspective. The first is that this work is going to be the first try to use scene graph as a compressed representation of an image. From the second perspective we are going to use a general autoencoder architecture with meaningful graph structure as a representation. 
-
-# Dissertation chapters
 
 # Reference

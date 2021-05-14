@@ -146,8 +146,6 @@ Dataset structure:
 
 Images are in JPEG format with various height and width.
 
-
-
 ---
 
 # Future planing

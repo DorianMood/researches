@@ -41,7 +41,7 @@ Discrete cosine transform (DCT), Huffman coding.
 
 <p class="break"></p>
 
-It is common to use Fourier transform based methods in image compression. A popular implementation of Fourier transform for discrete functions is Discrete Cosine Transform.
+It is common to use DCT based methods in image compression. A popular implementation of Fourier transform for discrete functions is Discrete Cosine Transform.
 
 However this is not the only one approach. Instead of using a predefined polynomial to encode an image, it is possible to use neural networks to pack and unpack information.
 
@@ -73,7 +73,18 @@ There are already algorithms capable to extract Scene Graphs form image. There a
 
 ---
 
-# Approach and methodology
+# Niches
+
+Potential application niches:
+
+1. Limited space on machine with high computational power.
+2. Huge images needed to be transmitted through a network with limited speed.
+
+TODO : verbally describe limitations
+
+---
+
+# Methodology
 
 A general approach is to use two models: one model will be used to generate intermediate representation, another one will be used to restore an original image from its representation.
 
@@ -135,22 +146,7 @@ Dataset structure:
 
 Images are in JPEG format with various height and width.
 
----
 
-# Potential outcomes
-
-Potential application niches:
-
-1. Limited space on machine with high computational power.
-2. Huge images needed to be transmitted through a network with limited speed.
-
----
-
-# Potential limitations
-
-The quality of restored images could be not as good as it needed. 
-
-This problem can be solved by storing an additional information about an image such as scene and objects convolutional features.
 
 ---
 
@@ -158,27 +154,13 @@ This problem can be solved by storing an additional information about an image s
 
 After the primary research it is clear that the model is not as easy as it thought to be before.
 
+TODO : make it more like schedule (4 quarters)
+
 Future plans include:
  - Setting up a model
  - Training the model in a lab
  - Making publications
  - Summarizing a research result in final thesis
-
----
-
-# Model
-
-1. Set up a SGG model
-2. Set up a generative model
-3. Adjust parameters
-
----
-
-# Publications
-
-During this research it is possible to make several publications. Since the middle part of the model is not clear yet, now we can only talk about compression algorithm in general.
-
-It is highly possible that there will be several improvements, that then can be summed up in another publication.
 
 ---
 

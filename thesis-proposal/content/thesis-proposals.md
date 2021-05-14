@@ -15,7 +15,7 @@ For now a general approach is to encode an image to compressed representation us
 
 In this work we are going to apply graph convolution algorithms to generate a representation of an image that takes less space and can be transported or stored more effectively. The core of this framework is scene graph representation of an image.
 
-# Project statement
+# Objective
 
 The first question is how do we memorize some image or visual scene in our life. We do not operate in terms of pixels or object coordinates. More likely we use something like scheme, which describes the most important parts of an image as it shown on [@fig:image_and_scene_graph].
 

@@ -57,7 +57,7 @@ There were several approaches to apply neural networks architecture in image com
 
 ---
 
-# Project statement
+# Objective
 
 <div class="twocols">
 

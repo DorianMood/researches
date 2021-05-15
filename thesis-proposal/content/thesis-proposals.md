@@ -15,6 +15,8 @@ For now a general approach is to encode an image to compressed representation us
 
 In this work we are going to apply graph convolution algorithms to generate a representation of an image that takes less space and can be transported or stored more effectively. The core of this framework is scene graph representation of an image.
 
+The contribution of this work can be considered from two major perspective. The first is that this work is going to be the first try to use scene graph as a compressed representation of an image. From the second perspective we are going to use a general autoencoder architecture with meaningful graph structure as a representation.
+
 # Objective
 
 The first question is how do we memorize some image or visual scene in our life. We do not operate in terms of pixels or object coordinates. More likely we use something like scheme, which describes the most important parts of an image as it shown on [@fig:image_and_scene_graph].
@@ -88,9 +90,5 @@ Dataset consists of several main parts:
 3. Scene graphs, obtained from images.
 
 Images are in JPEG format with various height and width.
-
-# Contributions
-
-The contribution of this work can be considered from two major perspective. The first is that this work is going to be the first try to use scene graph as a compressed representation of an image. From the second perspective we are going to use a general autoencoder architecture with meaningful graph structure as a representation. 
 
 # Reference

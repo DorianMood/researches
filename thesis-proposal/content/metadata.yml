@@ -8,5 +8,7 @@ location: Beihang University, Beijing
 supervisor:
 - Andy Guo
 degree: MSc
+bibliography: [./content/index.bib]
+csl: [./content/ref.csl]
 ---
 

@@ -1,10 +1,10 @@
 ---
-bibliography: [index.bib]
+bi2bliography: [index.bib]
 title: Nikita LS1906205
 author:
   - name: Nikita Dolgoshein
     affiliation: Beihang University
-csl: [ref.csl]
+c2sl: [ref.csl]
 ---
 
 # Introduction
@@ -21,7 +21,7 @@ The contribution of this work can be considered from two major perspective. The 
 
 The first question is how do we memorize some image or visual scene in our life. We do not operate in terms of pixels or object coordinates. More likely we use something like scheme, which describes the most important parts of an image as it shown on [@fig:image_and_scene_graph].
 
-![**Image and scene graph associated with it**](./img/Image%20and%20scene%20graph.png){#fig:image_and_scene_graph}
+![**Image and scene graph associated with it**](./img/Image and scene graph.png){#fig:image_and_scene_graph}
 
 The scene graph represented on the figure above is simplified, real graph can also have node attributes different from just an object label, for example in case of hair we can also attach an attribute "brown" and "curly".
 
@@ -40,26 +40,26 @@ The main contribution of this work is applying a graph convolution in image comp
 
 In case of this work we can consider scene graph as such structure (@fig:application-general-pipeline) with objects obtained from Object Detection step represented as nodes of this graph, attributes of such nodes can be extracted attributes of an object (here we can simply use output of the last convolutional layer of this object region). Applying graph convolution on such graph we can obtain relationships information, and talking about graphs we can treat such relationships as an edges. So, after this step we obtain so called *Scene Graph*, which represents a meaningful information about image. We can also design a generation model and then restore image from such representation. The image obtained from the last step will not be identical, and the purpose of this work is to design such an algorithm that will produce similar enough image.
 
-![**Application general pipeline.** First scene graph and convolution features are obtained. Then this can be treated as a compressed representation of initial image. It can be sent through network or being stored on machine. When the original image is needed we can feed this representation to generative model to obtain initial image.](./img/Application%20general%20pipeline.png){#fig:application-general-pipeline}
+![**Application general pipeline.** First scene graph and convolution features are obtained. Then this can be treated as a compressed representation of initial image. It can be sent through network or being stored on machine. When the original image is needed we can feed this representation to generative model to obtain initial image.](./img/Application general pipeline.png){#fig:application-general-pipeline}
 
 Application general pipeline can be divided on three steps:
 
 1. Scene Graph generation. Having an image as an input on this step we need to generate a scene graph of this image. Here is an example of an image and its scene graph (@fig:image-and-scene-graph)
 2. Image generation based on scene graph. Having a scene graph on this step we need to generate (or restore) image.
 
-![**Image and its scene graph**](./img/Image%20and%20scene%20graph.png){#fig:image-and-scene-graph}
+![**Image and its scene graph**](./img/Image and scene graph.png){#fig:image-and-scene-graph}
 
 The first thing we want to do is object detection. We need labeled objects regions, that were detected from image. Now there are many various object algorithms, they are already quite advanced and we can simply choose one of them and use as it is. There are a couple of possible choices: FastRCNN, Object detection with transformers, YOLOv5 etc.
 
 After object detection algorithm applied we will have a list of regions and the classes for each region (@fig:objects-detected), we will also need a convolutional features for each region (it will be just a small vector of values obtained from top convolutional layer). Having all the listed we have enough information to build a scene graph and restore image when it is needed. mMore concrete we can use information about detected object regions as a hint to restore original image.
 
-![**Example of detected objects using FastRCNN**](./img/Object%20detected.png){#fig:objects-detected}
+![**Example of detected objects using FastRCNN**](./img/Object detected.png){#fig:objects-detected}
 
 Next we start building a scene graph. Scene graph can be built using different approaches, but we decided to use an approach with graph convolutional networks, since it shows a nice performance and, probably, graph convolution has a bit of potential now. There are still many publications in this sphere.
 
 As we can see from (@fig:scene-graph-example), first objects are detected and then they are filtered and scene graph is obtained.
 
-![**Scene graph generation general view.** The left part is original image, the middle part is image with detected objects and the right part is scene graph that can be obtained from such image.](./img/Scene%20graph%20example.png){#fig:scene-graph-example}
+![**Scene graph generation general view.** The left part is original image, the middle part is image with detected objects and the right part is scene graph that can be obtained from such image.](./img/Scene graph example.png){#fig:scene-graph-example}
 
 Scene graph generation is not an easy task, so let us introduce a basic scene graph generation pipeline [@fig:sgg-pipeline]. It's a pity that it is not possible to use such algorithm out-of-the-box, so we will need to implement one of scene graph generation algorithms.
 
@@ -71,11 +71,11 @@ As an input such algorithms usually take an image with detected objects. It is n
 
 Next step is to connect each object with all the others, so we have a fully-connected bipartite graph. Those connections are graph edges and they are also called relationships proposals. After that step relationships proposals are being filtered. Basically it means that algorithm compares two related objects and if they are likely not related to each other, then it will remove this relation from relations list. Then after obtaining filtered relationships we can build an unlabeled version of scene graph (with no relation labels). To label relations we apply a Graph Convolutional network, which will find a mapping of corresponding labels for each relation. It's worth to mention that the final graph is directed. If there is a relation form first object to second it doesn't mean that there is a relation from second to first.
 
-![**General pipeline to generate a scene graph based on objects detected from original image.**](./img/SGG%20pipeline.png){#fig:sgg-pipeline}
+![**General pipeline to generate a scene graph based on objects detected from original image.**](./img/SGG pipeline.png){#fig:sgg-pipeline}
 
 Having a scene graph and detected objects (objects labels and attributes, objects regions, objects convolutional features) and some convolutional feature of a scene, we can then use this information to restore an image. Figure below [@fig:image-generation-from-sg] shows a general pipeline for such task.
 
-![**General pipeline to generate an image from an arbitrary scene graph.**](./img/Image%20generation%20from%20SG.png){#fig:image-generation-from-sg}
+![**General pipeline to generate an image from an arbitrary scene graph.**](./img/Image generation from SG.png){#fig:image-generation-from-sg}
 
 As we can see from the figure, we first take a scene graph and based on objects information we build a scheme of scene, we basically map a scene to know were are the objects located and what features they have. Then such map is combined with scene convolutional features and fed in generative model, that will generate an image.
 

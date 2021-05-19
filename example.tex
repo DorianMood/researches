@@ -40,7 +40,7 @@
 % Outline frame
 % PLEASE RUN pdflatex TWICE 
 \begin{frame}
-    \frametitle{Outline}
+    \framesubtitle{Outline}
     \tableofcontents
 \end{frame}
 %%=====================================================================
@@ -49,6 +49,7 @@
 
 \begin{frame}
     \frametitle{Introduction}
+    \framesubtitle{Introduction}
     \begin{block}{Image compression}
         Image compression is an important task in computer science and engineering.
         Two main approaches:
@@ -61,7 +62,8 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{JPEG}
+    \frametitle{Introduction}
+    \framesubtitle{JPEG}
     Famous JPEG format, for example, has following steps, and only last three are about compression.
 
     \begin{enumerate}
@@ -73,7 +75,8 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Compression}
+    \frametitle{Introduction}
+    \framesubtitle{Compression}
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \includegraphics[width=\textwidth]{figure/2d-dct.png}
@@ -89,7 +92,8 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Neural compression}
+    \frametitle{Introduction}
+    \framesubtitle{Neural compression}
     There were several approaches to apply neural networks architecture in image compression. Take an autoencoder architecture as an example:
     \begin{block}{Autoencoder for compression}
         \includegraphics[width=\textwidth]{figure/neural-compression.png}
@@ -98,7 +102,8 @@
 
 
 \begin{frame}
-    \frametitle{Image and sene gaph}
+    \frametitle{Introduction}
+    \framesubtitle{Image and sene gaph}
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \includegraphics[width=\textwidth]{figure/image-and-scene-graph.png}
@@ -112,7 +117,8 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Niches}
+    \frametitle{Introduction}
+    \framesubtitle{Niches}
     Potential application niches:
 
     \begin{enumerate}
@@ -124,7 +130,8 @@
 \section{Graph convolution}
 
 \begin{frame}
-    \frametitle{Problem}
+    \frametitle{Graph convolution}
+    \framesubtitle{Problem}
     Due to grid nature of CNN, it is quite challenging to apply such architecture on such objects as road map, molecule or even human skeleton etc. Let me remind that all the listed objects are traditionally modeled as some kind of graph. It is clear that it's impossible to apply CNN on graph data directly due to it's non-euclidean nature.
     \begin{block}{Graph}
         \centering
@@ -133,7 +140,8 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Solution}
+    \frametitle{Graph convolution}
+    \framesubtitle{Solution}
     All graph convolution architectures are based on a simple statement: a properties of a given node is highly determined by its neighbors. We can aggregate information from node neighbors to know more about node itself.
     \begin{block}{Graph convoltuion}
         \centering
@@ -142,20 +150,22 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Graph attention network as an example}
+    \frametitle{Graph convolution}
+    \framesubtitle{Graph attention network as an example}
     To get familiar with graph convolution let us introduce a popular network architecture, which is called Graph Attention Network (GAT).
-    \begin{block}{Graph convoltuion}
+    \begin{block}{Graph attention network}
         \centering
         \includegraphics[height=80pt]{figure/attention.png}
     \end{block}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Graph attention network as an example}
+    \frametitle{Graph convolution}
+    \framesubtitle{Graph attention network as an example}
     \begin{equation}
         h_i^{(l)}=COMBINE(h_i^{(l-1)}, AGGREGATE(v_j\in N_i))
     \end{equation}
-    \begin{block}{Graph convoltuion}
+    \begin{block}{Graph attention network}
         \centering
         \includegraphics[height=80pt]{figure/attention.png}
     \end{block}
@@ -163,7 +173,8 @@
 
 
 \begin{frame}
-    \frametitle{Graph attention network as an example}
+    \frametitle{Graph convolution}
+    \framesubtitle{Graph attention network as an example}
     Attention for $e_{ij}$ can be calculated using following formula:
 
     \begin{equation}
@@ -176,7 +187,7 @@
         h_i^{(l)}=\sigma(\dfrac{1}{K}\sum_{k=1}^{K}\sum_{j\in N_i}{\alpha^k_{i,j}W^kh^{(l-1)}_j})
     \end{equation}
 
-    \begin{block}{Graph convoltuion}
+    \begin{block}{Graph attention network}
         \centering
         \includegraphics[height=40pt]{figure/attention.png}
     \end{block}
@@ -186,7 +197,8 @@
 \section{Methodology}
 
 \begin{frame}
-    \frametitle{Image scene graph}
+    \frametitle{Methodology}
+    \framesubtitle{Image scene graph}
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \includegraphics[width=\textwidth]{figure/image-and-scene-graph.png}
@@ -198,7 +210,8 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Approach}
+    \frametitle{Methodology}
+    \framesubtitle{Approach}
     A general approach is to use two models: one model will be used to generate intermediate representation, another one will be used to restore an original image from its representation.
     \vspace{5pt}
     SGG model will extract scene graph from given image, convolutional features for a whole image as well as convolutional features for each object. Those convolutional features will help us to restore image later.
@@ -210,7 +223,8 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{General pipeline}
+    \frametitle{Methodology}
+    \framesubtitle{General pipeline}
     First scene graph and convolution features are obtained. Then this can be treated as a compressed representation of initial image. It can be sent through network or being stored on machine. When the original image is needed we can feed this representation to generative model to obtain initial image.
     \begin{block}{General pipeline}
         \includegraphics[width=\textwidth]{figure/application-general-pipeline.png}
@@ -218,7 +232,8 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Scene graph example}
+    \frametitle{Methodology}
+    \framesubtitle{Scene graph example}
     \textbf{Scene graph generation general view.} The left part is original image, the middle part is image with detected objects and the right part is scene graph that can be obtained from such image.
     \begin{block}{Scene graph example}
         \includegraphics[width=\textwidth]{figure/scene-graph-example.png}
@@ -226,13 +241,15 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Scene graph generation}
+    \frametitle{Methodology}
+    \framesubtitle{Scene graph generation}
     \centering
     \includegraphics[height=180pt]{figure/sgg-pipeline.png}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Image generation pipeline}
+    \frametitle{Methodology}
+    \framesubtitle{Image generation pipeline}
     General pipeline to generate an image from an arbitrary scene graph. We use additional information from compression step to obtain bounding boxes and convolutional features in generation step.
     \begin{block}{Image generation}
         \includegraphics[width=\textwidth]{figure/image-generation-from-sg.png}

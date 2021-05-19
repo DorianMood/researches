@@ -12,80 +12,84 @@
 \input{beihangbeamerstyle/beihangcolor}
 \input{beihangbeamerstyle/beihangbeamerstyle}
 
-\title{Beamer Style of Beihang University}
-\author{Xiaoke Yang\\
-Beihang University (\texttt{xiaokeyang@buaa.edu.cn})}
-\date{What seminar/conference, Which location, Wed  1 Jun 11:25:45 CST 2016}
+\title{Neural image compression with scene graphs}
+\author{道尔格\\
+Beihang University (\texttt{ls1906205@buaa.edu.cn})}
+\date{Thesis proposal defence, Beihang University, Fri  21 May 2021}
 
 
 \begin{document}
 %----------------------------------------------------------------------
 % Title frame
 \begin{frame}[plain]
-\maketitle
+    \maketitle
 \end{frame}
 
 %----------------------------------------------------------------------
 % Outline frame
 % PLEASE RUN pdflatex TWICE 
 \begin{frame}
-\frametitle{Outline}
-\tableofcontents
+    \frametitle{Outline}
+    \tableofcontents
 \end{frame}
 %%=====================================================================
 % Section I
-\section{Motivation}
+\section{Introduction}
 %----------------------------------------------------------------------
 % Content frame
 \begin{frame}
-\frametitle{Motivation}
-\framesubtitle{Why I made this beamer style}
-\begin{block}{Demonstration of the use of items and blocks}
-\begin{itemize}
-\item No one has done it.
-\item I need one.
-\pause \item Share with others.
-\end{itemize}
-\end{block}
-\pause
-\begin{block}{Another block}
-This block appears after a pause. Simply delete the \texttt{\textbackslash pause} command if this animation is not needed. Add the pause command whenever a pause is needed. 
-\end{block}
-\end{frame}
+    \frametitle{Introduction}
 
-%%=====================================================================
-% Section II
-\section{This is the second section: a two-column slide}
+    \framesubtitle{Why I made this beamer style}
+    \begin{block}{Image compression}
+        Image compression is an important task in computer science and engineering.
+        Two main approaches:
+        \begin{itemize}
+            \item Lossy (estimating information). JPEG etc.
+            \item Lossless (compressing information). DEFLATE etc.
+        \end{itemize}
+        Discrete cosine transform (DCT), Huffman coding.
+    \end{block}
+\end{frame}
 %----------------------------------------------------------------------
 \begin{frame}
-\frametitle{A Two-column Slide}
-\begin{columns} 
-\begin{column}{0.5\textwidth} 
-\begin{block}{The first column}
-This is the first column.
-This is the first column.
-This is the first column.
-This is the first column.
-This is the first column.
-This is the first column.
-This is the first column.
-This is the first column.
-This is the first column.
-This is the first column.
-This is the first column.
-This is the first column.
-This is the first column.
-This is the first column.
-\end{block}
-\end{column}
-\begin{column}{0.5\textwidth} 
-\begin{block}{The second column}
-{\color{coreBlue}{This is the only ``Beihang colour'' I found. }} Other built-in colours can also be used, e.g. {\color{red}{red}}, {\color{orange}{orange}}, {\color{blue}{blue}}
-\vspace{9.5em}
-\end{block}
-\end{column}
-\end{columns}
+    \frametitle{Compression}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \includegraphics[width=\textwidth]{figure/2d-dct.png}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{block}{Image compression}
+
+                It is common to use DCT based methods in image compression. A popular implementation of Fourier transform for discrete functions is Discrete Cosine Transform.
+
+                However this is not the only one approach. Instead of using a predefined polynomial to encode an image, it is possible to use neural networks to pack and unpack information.
+
+            \end{block}
+        \end{column}
+    \end{columns}
 \end{frame}
+
+\begin{frame}
+    \frametitle{Neural compression}
+    There were several approaches to apply neural networks architecture in image compression. Take an autoencoder architecture as an example:
+    \includegraphics[width=\textwidth]{figure/neural-compression.png}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Image and sene gaph}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \includegraphics[width=\textwidth]{figure/image-and-scene-graph.png}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            How do we memorize image or visual scene in our life. We do not operate in terms of pixels or object coordinates. More likely we use something like scheme, which describes the most important parts of an image.
+            There are already algorithms capable to extract Scene Graphs form image. There are some approaches to generate an image from scene graphs. We can combine those two.
+        \end{column}
+    \end{columns}
+\end{frame}
+
 \end{document}
 
 

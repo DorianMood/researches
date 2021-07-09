@@ -29,7 +29,7 @@ Traditionally there are two completely different group of methods in graph learn
 
 **Spatial methods** are more intuitive for those who familiar with CNNs since in these methods neighbor aggregation is almost similar with neighbor aggregation in CNNs. Since spatial methods can be applied on graphs with arbitrary size and arbitrary structure, it leads to computational instability of spatial methods.
 
-# 3. Learning on graphs
+# Learning on graphs
 
 Spectral learning methods imply eigen-decomposition of graph Laplacian. Graph Laplacian [@eq:1] reflects a smoothens of graph, or in other words how different is each node from it's neighbors. Eigen-decomposition is a representation of matrix with it's eigenvectors and eigenvalues [@eq:eigen_decomposition]. Eigenvectors are thought as an independent components and eigenvalues as a frequencies or strengths of those components. Then similar to Fourier filters, we use graph Laplacian filter [@eq:3] which basically affects eigenvalues diagonal matrix.
 
@@ -109,7 +109,7 @@ $$
 h_i^{(l)}=\sigma(\dfrac{1}{K}\sum_{k=1}^{K}\sum_{j\in N_i}{\alpha^k_{i,j}W^kh^{(l-1)}_j})
 $${#eq:8}
 
-# 4. Applications
+# Applications
 
 In [@Yang_Zou_2020] authors use GNN in task of human-object interaction detection. They first project two feature tensors (regions of image, recognized as object and human) on graph space, where all nodes are connected. Then message passing is applied, which propagates a given signal through graph. Afterwards they project all the convolved features back to convolutional space and apply fully connected layers to get probabilities.
 
@@ -140,7 +140,7 @@ $$
 g\star x^k_t=(W_k\odot\tilde{A}^k\odot{FFR})x_t
 $${#eq:traffic_gcn}
 
-# 5. Conclusion
+# Conclusion
 
 In general graphs are quite flexible data structure. Using graph data and graph processing algorithms increases performance in different tasks such as classification, time-series forecasting, computer vision tasks etc.
 

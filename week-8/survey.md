@@ -9,7 +9,8 @@ author:
     location: Beijing
     email: nikita01051997@gmail.com
 csl: [ieee.csl]
-autoSectionLabels: True
+autoSectionLabels: true
+numbersections: true
 ---
 
 # Introduction

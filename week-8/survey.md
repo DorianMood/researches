@@ -20,11 +20,11 @@ Nowadays CNNs are used in a variety of tasks such as classification, generation,
 
 ![Undirected graph with three types of nodes and weighted edges](graph.png){#fig:1}
 
-Such structure can be used to describe elements and connections among them. For example human skeleton, where elements are joints and connections are bones. Since graphs are quite representative, it would be preferable to use it directly in all the variety of tasks such as graph classification, node classification, graph or node labeling etc. There are many approaches in recent years to apply mentioned above convolutional architecture on graph structured data.
+Such structure can be used to describe elements and connections between them. For example human skeleton, with elements as joints and connections as bones. Since graphs are quite representative, it would be preferable to use it directly in all the variety of tasks such as graph classification, node classification, graph or node labeling etc. There are many approaches in recent years to apply mentioned above convolutional architecture on graph structured data.
 
 # Preliminary and background
 
-There are some theoretical knowledge that are required to understand graph neural networks (GNNs). In this part we are going to give reader an introduction to graph processing and graph learning approaches.
+There are some theoretical knowledge that are required to understand graph neural networks (GNNs). In this part we are going to give reader an introduction to graph processing and graph learning approaches. We start with definition of graph, the most interesting properties for us, then move to graph convolution, introducing different approaches to apply convolution on graph.
 
 ## Graph representation
 

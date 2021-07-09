@@ -11,54 +11,25 @@ csl: [ieee.csl]
 autoSectionLabels: True
 ---
 
-# 1. Introduction
+# Introduction
 
-Convolutional neural networks have shown a high performance in several fields during recent years. Power of convolutional neural networks (CNNs) is mainly in their ability to take a local features into account. It turns out that CNN architecture is extremely good and effective when we deal with *structured data*. In early beginning of CNNs one of the milestone works was VGG-19 [@Simonyan_Zisserman_2015] and AlexNet [@Krizhevsky_Sutskever_Hinton_2017], here authors proved that convolutional architectures can be way more computationally effective. It has also been shown that learned convolutional filters can reflect a local structure of sample.
+Convolutional neural networks showed a high performance during recent years. Convolutional neural networks (CNNs) are powerful mainly because of their ability to take a local features into account. It turns out that CNN architecture is extremely good and effective when we deal with *structured data*. In early beginning of CNNs one of the milestone works was VGG-19 [@Simonyan_Zisserman_2015] and AlexNet [@Krizhevsky_Sutskever_Hinton_2017], here authors proved that convolutional architectures can be way more computationally effective. It has also been shown that learned convolutional filters can reflect a local structure of sample.
 
-Nowadays CNNs are used in a variety of tasks such as classification, generation, clustering, dimensionality reduction etc. The main disadvantage of CNNs, however, is that it is domain specific. Due to grid nature of CNN, it is quite challenging to apply such architecture on such objects as road map, molecule or even human skeleton etc. Let me remind that all the listed objects are traditionally modeled as some kind of graph [@fig:1]. It is clear that it's impossible to apply CNN on graph data directly due to it's non-euclidean nature.
+CNNs are used in classification, generation, clustering, dimensionality reduction etc. The main disadvantage of CNNs, is that it is domain specific. Because of its grid nature, it is quite challenging to apply such architecture on objects like road map, molecule or even human skeleton etc. Let me remind that all the listed objects are traditionally modeled as some kind of graph. It is clear that it's impossible to apply CNN on graph data directly due to it's non-euclidean nature.
 
-![Undirected graph with three types of nodes and weighted edges](graph.png){#fig:1}
-
-Such structure can be used to describe elements and connections among them. For example human skeleton, where elements are joints and connections are bones. Since graphs are quite representative, we would like to use it directly in all the variety of tasks such as graph classification, node classification, labeling etc. There are many approaches in recent years to apply mentioned above convolutional architecture on graph structured data.
-
-# 2. Preliminary and background
-
-There are some theoretical knowledge that are required to understand graph neural networks (GNNs). In this part author is going to give reader an introduction to graph processing.
-
-## 2.1. Graph representation
+# Preliminary and background
 
 Let graph $G$ have a node set $v\in V$ and edge set $e\in E$. Such graph can be represented as square adjacency matrix $A\in \mathbb{Z}^{N\times N}$, where $A_{ij}=0$ if nodes $v_i$ and $v_j$ are not connected. Otherwise, if nodes are connected, then $A_{ij}$ is equal to the weight of the edge $e_{ij}$ between nodes $v_i$ and $v_j$.
 
-It is important to notice that if graph $G$ is undirected, then $A$ is *symmetric*. This property is quite useful and it will be used later.
-
-## 2.2. Convolution on graph
-
-Conceptually, convolution operation in CNNs is used to *aggregate* data from fixed neighborhood. For example in pictures it is neighboring pixels (first-order neighbors in case of $3\times 3$ filter, first-order and second-order neighbors in case of $5\times 5$ filter etc.). After that an activation function is being applied. This is the simplest pipeline, and, of course, there is quite a bit of optional layers such as pooling or residual [@He_Zhang_Ren_Sun_2015].
-
-After summarizing the main concepts of CNNs we can then start thinking about applying similar architecture on graph domain. There is one important point which is needed to be mentioned before we start: all the methods here are based on statement that node (or edge) in graph is largely determined by its neighbors. This point is quite important since all the approaches mentioned below perform some kind of *aggregating a neighboring information* and then making assumptions on node itself based on this aggregated information.
+Convolution operation in CNNs is used to *aggregate* data from fixed neighborhood. For example in pictures it is neighboring pixels (first-order neighbors in case of $3\times 3$ filter, first-order and second-order neighbors in case of $5\times 5$ filter etc.). After that an activation function is being applied.
 
 Traditionally there are two completely different group of methods in graph learning.
 
-**Spectral methods** are based on graph Laplacian matrix and it's eigen-decomposition (details will be shown next). There are several points to notice at first: Spectral methods are slightly more difficult and intuition is not obvious; To apply spectral convolution a fixed size graph is required for both learning and evaluation process (so, it can be used on such datasets as human skeleton or other fixed-size small graphs).
+**Spectral methods** are based on graph Laplacian matrix and it's eigen-decomposition (details will be shown next). There are several points to notice at first: Spectral methods are slightly more difficult and not obvious; To apply spectral convolution a fixed size graph is required for both learning and evaluation process.
 
-**Spatial methods** are more intuitive for those who familiar with CNNs since in these methods neighbor aggregation is almost similar with neighbor aggregation in CNNs. Since spatial methods can be applied on graphs with arbitrary size and arbitrary structure (instead fixed size in case of spectral methods), it leads to computational instability of spatial methods.
+**Spatial methods** are more intuitive for those who familiar with CNNs since in these methods neighbor aggregation is almost similar with neighbor aggregation in CNNs. Since spatial methods can be applied on graphs with arbitrary size and arbitrary structure, it leads to computational instability of spatial methods.
 
 # 3. Learning on graphs
-
-Basically learning on graphs consists of several steps:
-
-1. **Aggregate**. On this step we gather information from neighboring nodes and summarize it.
-2. **Combine**. On this step we combine aggregated information and own information of current node.
-
-Basically most of existing frameworks can be expressed in a way presented in [@eq:4]. So, both aggregate and combine steps are customizable, and essentially in those steps the main differences between architectures happens.
-
-$$
-h_i^{(l)}=COMBINE(h_i^{(l-1)}, AGGREGATE(v_j\in N_i))
-$${#eq:4}
-
-Where $h_i^{(l)}$ is a state of node $v_i$ after layer $l$ and $N_i$ are neighbors of node $v_i$.
-
-## 3.1. Spectral learning
 
 Spectral learning methods imply eigen-decomposition of graph Laplacian. Graph Laplacian [@eq:1] reflects a smoothens of graph, or in other words how different is each node from it's neighbors. Eigen-decomposition is a representation of matrix with it's eigenvectors and eigenvalues [@eq:eigen_decomposition]. Eigenvectors are thought as an independent components and eigenvalues as a frequencies or strengths of those components. Then similar to Fourier filters, we use graph Laplacian filter [@eq:3] which basically affects eigenvalues diagonal matrix.
 
@@ -100,14 +71,6 @@ $${#eq:5}
 
 Where $T_k$ is Chebyshev polynomial of order $k$.
 
-In [@Levie_Monti_Bresson_Bronstein_2019] authors use Cayley polynomials [@eq:6] as a filter kernel.
-
-$$
-g_{c,h}(\Lambda)=c_0+2Re\{\sum_{j=0}^{r}c_j(h\Lambda-i)^j(h\Lambda+i)^{-j}\}
-$${#eq:6}
-
-Where $c$ and $h$ are optimized during training and $Re$ returns a real part of complex number. They call $h$ spectral zoom, this learnable parameter in essence determines what frequencies are more important and what frequencies are less important in graph spectrum.
-
 In [@Monti_Otness_Bronstein_2018] they used a notion of *motifs* - small directed graphs to encode original graph structure. So they compressed an original adjacency matrix and made it symmetric.
 
 In [@Dwivedi_Bresson_2020] they applied transformer [@Vaswani_Shazeer_Parmar_Uszkoreit_Jones_Gomez_Kaiser_Polosukhin_2017] architecture on graph, they used graph Laplacian eigenvalues as a positional encoding.
@@ -120,11 +83,7 @@ $${#eq:sgc}
 
 Recently there was another approach in [@Chen_Wei_Huang_Ding_Li_2020], they introduced a residual connection from initial state, so they solved an oversmoothing problem, which is quite common in spectral architectures. The signal decays quite fast, and usually stacking no more then 4 layers are used. They reached a reasonable performance with their residual architecture on up to 64 layers deep network.
 
-## 3.2. Spacial learning
-
-Spatial learning methods are a bit more intuitive, because there is a visual interpretation. All those methods are based on spatial interpretation of graph, convolution is defined as aggregation neighboring nodes information for each node [@fig:graph-spatial-convolution].
-
-![Graph spatial convolution](graph-spatial-convolution.png)
+Spatial learning methods are a bit more intuitive, because there is a visual interpretation. All those methods are based on spatial interpretation of graph, convolution is defined as aggregation neighboring nodes information for each node.
 
 In [@Hamilton_Ying_Leskovec_2018] they propose in some sense improved version of vanilla graph convolution. New algorithm was called GraphSAGE. The main contribution is an idea to use $N(v)$ function for *sampling* neighbors. This function basically takes up to $\gamma$ neighbors of a node instead of taking into account all existing neighboring nodes.
 
@@ -150,20 +109,7 @@ $$
 h_i^{(l)}=\sigma(\dfrac{1}{K}\sum_{k=1}^{K}\sum_{j\in N_i}{\alpha^k_{i,j}W^kh^{(l-1)}_j})
 $${#eq:8}
 
-Here the only new idea is to put an attention mechanism. There are different ways of applying attention:
-
-- Use multiple attentions per edge. This is called multi-head attention.
-- Attention weights can be either concatenated or averaged.
-
-So, attention is a method to weight an edge according to its importance to node.
-
-In [@Bai_Cui_Jiao_Rossi_Hancock_2019] authors propose a way to surpass limitation of fixed-size graph by *aligning* graph to some known graphs, they call such graphs *backtrackless aligned grid*. Then apply spatial convolution.
-
-In [@Yang_Wang_Song_Yuan_Tao_2021] they use shortest path to compute Dejkstra algorithm to build a subtree, so they avoid redundant computations and the paths are more unique, which also helps to aggregate information more effective and helps to take into account remote neighbors in more stable way. In [@Fey_Lenssen_Weichert_Muller_2018] they used B-Spline approximation in convolution kernel. 
-
 # 4. Applications
-
-All the techniques mentioned above work with graph data, the minimal requirement for dataset we want to learn is graph structure. There are various fields to apply graph neural network models.
 
 In [@Yang_Zou_2020] authors use GNN in task of human-object interaction detection. They first project two feature tensors (regions of image, recognized as object and human) on graph space, where all nodes are connected. Then message passing is applied, which propagates a given signal through graph. Afterwards they project all the convolved features back to convolutional space and apply fully connected layers to get probabilities.
 

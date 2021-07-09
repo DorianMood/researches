@@ -4,7 +4,7 @@ title: Nikita LS1906205
 author:
   - name: Nikita Dolgoshein
     affiliation: Beihang University
-c2sl: [ref.csl]
+csl: [ref.csl]
 ---
 
 # Introduction

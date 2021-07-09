@@ -2,7 +2,7 @@
 bibliography: [index.bib]
 title: Graph convolutional network survey with applications
 subtitle: Graph convolutional network survey with applications
-abstract: Graph convolutional networks (GCNs) are a special type of convolutional network architecture that can learn from graph structured data. It is gaining huge popularity in the last years. Many papers and applications have been published. In this paper we review modern graph convolution approaches and its applications in real world.
+abstract: Graph convolutional network (GCN) is a special type of convolutional network architecture that can learn from graph structured data. It is gaining huge popularity in the last years. Many papers and applications have been published. In this paper we review modern graph convolution approaches and its applications in real world.
 author:
   - name: Nikita Dolgoshein
     affiliation: Beihang University

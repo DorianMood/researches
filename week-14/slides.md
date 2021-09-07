@@ -2,56 +2,57 @@
 marp: true
 ---
 
+<style>
+div.twocols {
+  margin-top: 35px;
+  column-count: 2;
+}
+div.twocols p:first-child,
+div.twocols h1:first-child,
+div.twocols h2:first-child,
+div.twocols ul:first-child,
+div.twocols ul li:first-child,
+div.twocols ul li p:first-child {
+  margin-top: 0 !important;
+}
+div.twocols p.break {
+  break-before: column;
+  margin-top: 0;
+}
+</style>
 # The problem
 
 Make use of SG while having bounding boxes a-priori.
 
 ---
 
-# Layout to image
+# Layout to image generated images
 
-![](layout2im.svg)
-![](lay)
+## Hand holding banana
 
----
+<div class="twocols">
 
-# What do they use a Graph representation for
+![](layout2im-0.svg)
 
-![](architecture.png)
+<p class="break">
 
----
+![](layout2im-1.svg)
 
-# Semantic image generation using scene graph
+</div>
 
-![](teaser_simsg.png)
-
----
-
-# Semantic image manipulation using SG
-
-![](sim.png)
+https://github.com/zhaobozb/layout2im
 
 ---
 
-# The problem
+# Scene graph to image
 
-## SGG pipeline:
+![height:500](sg2im-0.png)
 
-1. Object detection (bounding boxes, labels, convolutional features)
-2. Scene graph generation (relations)
-
-## Image generation pipeline:
-
-1. SG to layout (bounding boxes)
-2. Layout to image (image)
+https://github.com/google/sg2im
 
 ---
 
-# What do I have after object detection
 
-![](object%20detection.png)
-
-
-
+# TODO : 
 
 whether the reconstruction using BBs will fail when the BBs overlaps with specific relations (such as "hold")

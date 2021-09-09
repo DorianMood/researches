@@ -20,26 +20,57 @@ div.twocols p.break {
   margin-top: 0;
 }
 </style>
-# The problem
+# The problems I have encountered
 
-While trying to fine-tune FasterRCNN on VisualGenome dataset I am getting an unexpected results.
+ - Building HDF5 datasets to optimize memory usage
+ - While trying to fine-tune FasterRCNN on VisualGenome dataset I am getting an unexpected results
 
 ---
 
-# Train loss
+# Pytorch dataset
+
+Almost finished a best version of Visual Genome dataset for PyTorch.
+
+---
+
+# Training problems
+
+ - I have encountered several problems during training
+ - Mainly connected to input data format
+ - Cannot overfit
+
+---
+
+# Training loss
 
 ![](train-loss.png)
 
 ---
 
-# Val loss
+# Validation loss
 
 ![](val-loss.png)
 
 ---
 
-# Midterm assessment
+# Test loss
 
-Midterm Assessment
+![](test-loss.png)
 
 ---
+
+# Mind map
+
+![](mind-map.png)
+
+---
+
+# Semester todo
+
+➖ Attend math class (the last one)
+➖ Finish the simplest version of the system
+➖ Come up with convolutional features architecture
+➖ Prepare materials to publish
+➖ Midterm assessment
+➖ Look for a job in ML related field
+❔ Come back (hopefully)

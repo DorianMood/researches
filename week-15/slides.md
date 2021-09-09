@@ -20,6 +20,12 @@ div.twocols p.break {
   margin-top: 0;
 }
 </style>
+
+# Summer report
+## Nikita 道尔格 LS1906205
+
+---
+
 # The problems I have encountered
 
  - Building HDF5 datasets to optimize memory usage
@@ -30,6 +36,11 @@ div.twocols p.break {
 # Pytorch dataset
 
 Almost finished a best version of Visual Genome dataset for PyTorch.
+
+Currently I use a different one for a couple of reasons:
+
+- Existing `layout to image` is pretrained using a different implementation
+- Need a mechanism to convert labels into numeric values and filter out unneeded objects
 
 ---
 
@@ -73,4 +84,5 @@ Almost finished a best version of Visual Genome dataset for PyTorch.
 ➖ Prepare materials to publish
 ➖ Midterm assessment
 ➖ Look for a job in ML related field
+➖ Decide on future life strategy
 ❔ Come back (hopefully)

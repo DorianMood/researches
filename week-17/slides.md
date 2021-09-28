@@ -36,19 +36,39 @@ div.twocols p.break {
 
 # Detailed model structure
 
+![h:600](layout2im-model.jpg)
 
+---
+
+# Crop encoder
+
+![](crop-encoder.svg)
+
+---
+
+# Layout encoder
+
+![](layout-encoder.svg)
+
+---
+
+# Decoder
+
+![](decoder.svg)
 
 ---
 
 # Loss structure
 
+![h:600](layout2im-loss.jpg)
+
 ---
 
 # Separate training pipelines
 
+![](layout2im.jpg)
+
 ---
 
 # Adversarial training
-
----
 

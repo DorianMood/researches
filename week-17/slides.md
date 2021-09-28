@@ -70,5 +70,16 @@ div.twocols p.break {
 
 ---
 
-# Adversarial training
+# Training
 
+Thy used adversarial training approach employing two discriminators: $D_O$ and $D_I$ to discriminate real/fake objects  and images correspondingly.
+
+## Original paper losses
+
+1. Discriminator losses: $L_{D_O}$, $L_{D_I}$, $L_{D_{cls}}$
+2. Generator losses: $L_{G_I}$, $L_{G_z}$, $L_{KL}$, $L_{D_O}$, $L_{D_I}$, $L_{D_{cls}}$
+
+## My losses
+
+1. Discriminator losses: $L_{D_O}$, $L_{D_I}$, $L_{D_{cls}}$
+2. Generator losses: $L_{G_I}$, $L_{D_O}$, $L_{D_I}$, $L_{D_{cls}}$

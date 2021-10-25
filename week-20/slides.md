@@ -65,8 +65,13 @@ div.twocols p.break {
 
 Accourding to proposed GAN nature of the model, there are only two **losses**:
 
-1. Adverserial loss
-2. Distortion $L2$ loss
+$$
+L_{EGP}=E_{x-p_x}[\lambda_r(y) + d(x, x') - \beta log(D(x', y))]
+$$
+
+$$
+L_D=E_{x-p_x}[-log(1 - D(x', y))] + E_{x-p_x}[-log(D(x, y))]
+$$
 
 ### Modules:
 

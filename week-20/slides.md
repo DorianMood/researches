@@ -46,6 +46,12 @@ div.twocols p.break {
 
 ---
 
+# Pike signal to noise ratio / Bits per pixel
+
+![h:500](gan-better.png)
+
+---
+
 ## Channel normalization
 
 ![](channel-norm.png)
@@ -66,7 +72,7 @@ div.twocols p.break {
 Accourding to proposed GAN nature of the model, there are only two **losses**:
 
 $$
-L_{EGP}=E_{x-p_x}[\lambda_r(y) + d(x, x') - \beta log(D(x', y))]
+L_{EGP}=E_{x-p_x}[\lambda r(y) + d(x, x') - \beta log(D(x', y))]
 $$
 
 $$
@@ -75,6 +81,6 @@ $$
 
 ### Modules:
 
-1. Encoder
-2. Hyperior
-3. Decoder
+1. Encoder (FCN)
+2. Hyperior (Desibed in annothe paper and really diiult to undestand)
+3. Decoder (FCN)
